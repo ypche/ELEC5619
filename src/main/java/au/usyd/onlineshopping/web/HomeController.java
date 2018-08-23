@@ -1,4 +1,4 @@
-package au.usyd.onlineshopping;
+package au.usyd.onlineshopping.web;
 
 import java.text.DateFormat;
 import java.util.Date;
