@@ -6,6 +6,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -52,8 +53,9 @@ public class BookDaoImplement implements BookDao{
 
 	@Override
 	public List<Book> getBooksByGenre(String genre) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Book> books = getSession().createCriteria(Book.class)
+				.add(Restrictions.eq("genre", genre)).list();
+		return books;
 	}
 
 	@Override
@@ -63,3 +65,21 @@ public class BookDaoImplement implements BookDao{
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

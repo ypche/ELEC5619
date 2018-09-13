@@ -49,8 +49,15 @@ public class BookController {
 	@RequestMapping(value = "/delete/{id}")
 	public String deleteBook(@PathVariable("id") long id) {
 		bookService.deleteBook(id);
-//		return new ModelAndView("booklist");
 		return "redirect:/book/getAllBooks";
+	}
+	
+	@RequestMapping(value = "/genre/{genre}")
+	public ModelAndView getBooksByGenre(@PathVariable("genre")String genre){
+		ModelAndView model = new ModelAndView("genrebooklist");
+		List<Book> list = bookService.getBooksByGenre(genre);
+		model.addObject("genrelist",list);
+		return model;
 	}
 	
 	
