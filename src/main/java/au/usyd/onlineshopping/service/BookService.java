@@ -10,20 +10,21 @@ import au.usyd.onlineshopping.Entity.Book;
 import au.usyd.onlineshopping.dao.BookDao;
 
 
-@Service
-@Transactional
-public class BookService {
+
+public interface BookService {
 	
-	@Autowired
-	public BookDao bookDao;
+	public Book getBookById(long id);
 	
+	public Book getBookByName(String name);
 	
-	public void addBook(Book book) {
-		System.out.println(book.toString());
-		bookDao.addBook(book);
-	}
+	public void addBook(Book book);
 	
-	public List<Book> getBooks(){
-		return bookDao.getBooks();
-	}
+	public void deleteBook(long id);
+	
+	public List<Book> getBooksByKeyWord(String KeyWord);
+	
+	public List<Book> getBooksByGenre(String genre);
+	
+	public List<Book> getBooks();
+	
 }

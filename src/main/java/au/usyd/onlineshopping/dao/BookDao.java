@@ -9,26 +9,28 @@ import org.springframework.stereotype.Repository;
 
 import au.usyd.onlineshopping.Entity.Book;
 
-@Repository
-public class BookDao {
-	
-	
-	@Autowired
-	private SessionFactory sessionFactory;
-	
-	
-	private Session getSession() {
-		return sessionFactory.getCurrentSession();
-	}
-	
-	public void addBook(Book book) {
-		this.getSession().save(book);
-	}
-	
-	public List<Book> getBooks() {
-		// TODO Auto-generated method stub
-		return this.getSession().createCriteria(Book.class).list();
 
-	}
+public interface BookDao {
+	
+
+	
+	public Book getBookById(long id);
+	
+	public Book getBookByName(String name);
+	
+	public void addBook(Book book);
+	
+	public void deleteBook(long id);
+	
+	public List<Book> getBooksByKeyWord(String KeyWord);
+	
+	public List<Book> getBooksByGenre(String genre);
+	
+	public List<Book> getBooks();
+	
+
+	
+
+	
 	
 }

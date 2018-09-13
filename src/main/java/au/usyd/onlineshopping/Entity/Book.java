@@ -21,6 +21,9 @@ public class Book implements Serializable{
 	
 	private String author;
 	
+    //商品图片地址
+//    private String picUrl;
+	
 	private String genre;
 	
 	private double price;
@@ -41,14 +44,14 @@ public class Book implements Serializable{
 		super();
 	}
 	
-	public Book(String title, String author, String genre, double price, String bookpath, String description ) {
-		this.title = title;
-		this.author = author;
-		this.genre = genre;
-		this.price = price;
-		this.bookpath = bookpath;
-		this.description = description;
-	}
+//	public Book(String title, String author, String genre, double price, String bookpath, String description ) {
+//		this.title = title;
+//		this.author = author;
+//		this.genre = genre;
+//		this.price = price;
+//		this.bookpath = bookpath;
+//		this.description = description;
+//	}
 	
 
 	public long getId() {
@@ -106,4 +109,12 @@ public class Book implements Serializable{
 		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", genre=" + genre + ", price=" + price
 				+ ", filepath=" + bookpath + "]";
 	}
+
+//	public String getPicUrl() {
+//		return picUrl;
+//	}
+//
+//	public void setPicUrl(String picUrl) {
+//		this.picUrl = picUrl;
+//	}
 }

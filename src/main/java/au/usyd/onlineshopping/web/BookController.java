@@ -1,10 +1,14 @@
 package au.usyd.onlineshopping.web;
 
+import java.lang.ProcessBuilder.Redirect;
+import java.util.List;
 import java.util.Map;
 
+import org.hibernate.loader.custom.Return;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,29 +24,41 @@ public class BookController {
 	@Autowired
 	public BookService bookService;
 	
+	@RequestMapping(value = "/getAllBooks", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView model = new ModelAndView("booklist");
+		List<Book> list = bookService.getBooks();
+		model.addObject("list",list);
+		return model;
+	}
 	
-    @RequestMapping(value = "/newBook", method = RequestMethod.GET)
-    public ModelAndView newBook(ModelAndView model) {
-        Book book = new Book();
-        model.addObject("book", book);
-        model.setViewName("addBook");
-        return model;
-    }
+	@RequestMapping(value = "/addBook", method = RequestMethod.GET)
+	public ModelAndView addBook() {
+		ModelAndView model = new ModelAndView("addBook");
+		Book book = new Book();
+		model.addObject("bookForm",book);
+		return model;
+	}
 	
-	@RequestMapping(value = "/addBook", method = RequestMethod.POST)
-	public ModelAndView saveBook(@ModelAttribute Book book) {
+	@RequestMapping(value = "/saveBook", method = RequestMethod.POST)
+	public String saveBook(@ModelAttribute Book book) {
 		bookService.addBook(book);
-		return new ModelAndView("success");
+		return "redirect:/book/getAllBooks";
 	}
 	
-
-
-	
-	
-	public String getBook(Map<String,Object>map){
-		map.put("bookList", bookService.getBooks());
-		return "main";
+	@RequestMapping(value = "/delete/{id}")
+	public String deleteBook(@PathVariable("id") long id) {
+		bookService.deleteBook(id);
+//		return new ModelAndView("booklist");
+		return "redirect:/book/getAllBooks";
 	}
+	
+	
+
+	
+
+	
+	
 	
 	
 }
