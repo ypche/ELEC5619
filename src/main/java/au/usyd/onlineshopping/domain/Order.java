@@ -5,8 +5,11 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,8 +27,9 @@ public class Order implements Serializable {
 	@Column(name="order_date")
 	private Date orderDate;
 	
-	@Column(name="user_id")
-	private long userID;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="user_id")
+	private User userID;
 	
 	@Column(name="status")
 	private String status;
@@ -54,11 +58,11 @@ public class Order implements Serializable {
 		this.orderDate = orderDate;
 	}
 
-	public long getUserID() {
+	public User getUserID() {
 		return userID;
 	}
 
-	public void setUserID(long userID) {
+	public void setUserID(User userID) {
 		this.userID = userID;
 	}
 

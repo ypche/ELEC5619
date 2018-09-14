@@ -1,11 +1,15 @@
 package au.usyd.onlineshopping.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,6 +32,9 @@ public class User implements Serializable {
 	
 	@Column(name="role")
 	private String role;
+	
+	@OneToMany(targetEntity=Order.class, mappedBy="UserToOrder", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<Order> orders;
 
 	public long getId() {
 		return id;
@@ -67,5 +74,13 @@ public class User implements Serializable {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
 	}
 }
