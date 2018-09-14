@@ -16,7 +16,7 @@ import au.usyd.onlineshopping.Entity.Book;
 public class BookDaoImplement implements BookDao{
 
 	@Autowired
-	public SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 	
 	protected Session getSession() {
 		return sessionFactory.getCurrentSession();
@@ -47,15 +47,12 @@ public class BookDaoImplement implements BookDao{
 
 	@Override
 	public List<Book> getBooksByKeyWord(String KeyWord) {
-		@SuppressWarnings("unchecked")
-		List<Book> books =  getSession().createCriteria(Book.class)
-				.add(Restrictions.like("title", "%"+KeyWord+"%")).list();
-		return books;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public List<Book> getBooksByGenre(String genre) {
-		@SuppressWarnings("unchecked")
 		List<Book> books = getSession().createCriteria(Book.class)
 				.add(Restrictions.eq("genre", genre)).list();
 		return books;
