@@ -12,6 +12,11 @@
 <body>
 <spring:url value="/book/addBook" var="addURL"/>
 <a href="${addURL}">add a Book</a>
+
+<form action="search/${keyword}" method="GET" >
+	<input type="text" method="post" name="keyword" >
+	<button type="submit"  ></button>
+</form>
 <table>
 	<tr>
 		<td>title</td>

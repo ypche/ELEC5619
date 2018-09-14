@@ -4,7 +4,9 @@ import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.loader.custom.Return;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -60,8 +62,13 @@ public class BookController {
 		return model;
 	}
 	
-	@RequestMapping(value = "/search/{keyword}")
-	public ModelAndView searchBooksByKeyword(@PathVariable("keyword")String keyword){
+
+	
+	@RequestMapping(value = "/search")
+	public ModelAndView searchBooksByKeyword(HttpServletRequest request, 
+	        HttpServletResponse response){
+		String keyword = request.getParameter("keyword");
+		keyword = keyword.trim();
 		ModelAndView model = new ModelAndView("searchbooklist");
 		List<Book> list = bookService.getBooksByKeyWord(keyword);
 		model.addObject("searchlist",list);
