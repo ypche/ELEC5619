@@ -60,6 +60,14 @@ public class BookController {
 		return model;
 	}
 	
+	@RequestMapping(value = "/search/{keyword}")
+	public ModelAndView searchBooksByKeyword(@PathVariable("keyword")String keyword){
+		ModelAndView model = new ModelAndView("searchbooklist");
+		List<Book> list = bookService.getBooksByKeyWord(keyword);
+		model.addObject("searchlist",list);
+		return model;
+	}
+	
 	
 
 	

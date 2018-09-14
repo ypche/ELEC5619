@@ -14,7 +14,7 @@ import au.usyd.onlineshopping.dao.BookDao;
 public class BookServiceImpl implements BookService{
 	
 	@Autowired
-	BookDao bookDao;
+	public BookDao bookDao;
 
 	@Override
 	public Book getBookById(long id) {
