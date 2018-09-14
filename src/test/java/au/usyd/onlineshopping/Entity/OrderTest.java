@@ -1,4 +1,4 @@
-package au.usyd.onlineshopping.domain;
+package au.usyd.onlineshopping.Entity;
 
 import junit.framework.TestCase;
 
