@@ -17,7 +17,7 @@ public interface BookService {
 	
 	public Book getBookByName(String name);
 	
-	public void addBook(Book book);
+//	public void addBook(Book book);
 	
 	public void deleteBook(long id);
 	
@@ -26,5 +26,7 @@ public interface BookService {
 	public List<Book> getBooksByGenre(String genre);
 	
 	public List<Book> getBooks();
+	
+	public void addBook(Book book, String newFileName);
 	
 }

@@ -30,6 +30,8 @@ public class Book implements Serializable{
 	
 	private String bookpath;
 	
+	private String image;
+	
 	public String getBookpath() {
 		return bookpath;
 	}
@@ -96,7 +98,6 @@ public class Book implements Serializable{
 	}
 	
 
-	
 	public String getDescription() {
 		return description;
 	}
@@ -104,17 +105,21 @@ public class Book implements Serializable{
 		this.description = description;
 	}
 	
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", genre=" + genre + ", price=" + price
-				+ ", filepath=" + bookpath + "]";
+				+ ", bookpath=" + bookpath + ", image=" + image + ", description=" + description + "]";
 	}
 
-//	public String getPicUrl() {
-//		return picUrl;
-//	}
-//
-//	public void setPicUrl(String picUrl) {
-//		this.picUrl = picUrl;
-//	}
+
 }

@@ -26,9 +26,14 @@ public class BookServiceImpl implements BookService{
 		return bookDao.getBookByName(name);
 	}
 
+//	@Override
+//	public void addBook(Book book) {
+//		bookDao.addBook(book);
+//	}
+	
 	@Override
-	public void addBook(Book book) {
-		bookDao.addBook(book);
+	public void addBook(Book book, String newFileName) {
+		bookDao.addBook(book,newFileName);
 	}
 
 	@Override

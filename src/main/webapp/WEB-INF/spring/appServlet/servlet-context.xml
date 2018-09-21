@@ -25,6 +25,13 @@
 	
 	<context:component-scan base-package="au.usyd.onlineshopping" />
 	
-	
+	<!-- 上传文件 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="defaultEncoding" value="utf-8"/>
+		<!-- 最大内存大小 -->
+		<beans:property name="maxInMemorySize" value="10240"/>
+		<!-- 最大文件大小，-1为不限制大小 -->
+		<beans:property name="maxUploadSize" value="-1"/>
+	</beans:bean>
 	
 </beans:beans>

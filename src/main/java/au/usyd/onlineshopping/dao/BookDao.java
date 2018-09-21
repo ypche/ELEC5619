@@ -18,7 +18,8 @@ public interface BookDao {
 	
 	public Book getBookByName(String name);
 	
-	public void addBook(Book book);
+//	public void addBook(Book book);
+	public void addBook(Book book, String newFileName); 
 	
 	public void deleteBook(long id);
 	

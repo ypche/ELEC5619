@@ -14,7 +14,7 @@
 <%-- <a href="${addURL}">save a Book</a> --%>
 
     <h3>add books</</h3>
-    <form:form action="${addURL}" method="post" modelAttribute="bookForm">
+    <form:form action="${addURL}" method="post" modelAttribute="bookForm" enctype="multipart/form-data">
         <table>
             <form:hidden path="id" />
             <tr>
@@ -44,7 +44,14 @@
             <tr>
                 <td>description:</td>
                 <td><form:input path="description" /></td>
-            </tr>          
+            </tr> 
+            <tr>
+                <td>image:</td>
+                <td>
+                	<input type="file" name="imgFile"/>
+                </td>
+            </tr>
+                    
             <tr>
                 <td><input type="submit" value="save" /></td>
             </tr>

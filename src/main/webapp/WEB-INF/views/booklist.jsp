@@ -33,6 +33,11 @@
 			<td>${book.genre}</td>
 			<td>${book.price}</td>
 			<td>${book.bookpath}</td>
+			<td>
+				<c:if test="${book.image!=null}">
+					<img alt="" src="/pic/${book.image}" width="300" height="200">
+				</c:if>
+			</td>
 		<td>
 				<spring:url value = "/book/delete/${book.id}" var="deleteURL"></spring:url>
 				<a href="${deleteURL}"> delete</a>
@@ -40,8 +45,29 @@
 		</tr>
 	
 	</c:forEach>
+	
 </table>	
+
+<div id="result" class="result table clearfix">
+                <ul>
+                    <c:forEach var="p" items="${list}">
+                        <li><%-- <a
+                                href="${ pageContext.request.contextPath }/findByPid/<c:out value="${p.pid}"/>"> --%>
+                            <img
+                                    src="${pageContext.request.contextPath}/<c:out value="${p.image}"/>"
+                                    width="170" height="170" style="display: inline-block;"/> <span
+                                style='color: green'> 
+							    <td>${book.title}</td>
+								<td>${book.author}</td>
+								<td>${book.genre}</td>
+								<td>${book.price}</td>
+								<td>${book.bookpath}</td>
+								<td>${book.bookpath}</td>
+								</span>
+                        </a></li>
+                    </c:forEach>
+                </ul>
+            </div>
 </body>
 </html>
-
 

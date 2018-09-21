@@ -34,8 +34,13 @@ public class BookDaoImplement implements BookDao{
 		return book;
 	}
 
+//	@Override
+//	public void addBook(Book book) {
+//		getSession().save(book);
+//	}
 	@Override
-	public void addBook(Book book) {
+	public void addBook(Book book, String newFileName) {
+		book.setImage(newFileName);
 		getSession().save(book);
 	}
 
