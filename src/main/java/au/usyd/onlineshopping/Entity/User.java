@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="Users")
@@ -21,19 +23,23 @@ public class User implements Serializable {
 	@Column(name="id")
 	private long id;
 	
+	@NotEmpty
 	@Column(name="name")
 	private String name;
 	
+	@NotEmpty
 	@Column(name="password")
 	private String password;
 	
+	@Email
 	@Column(name="email")
 	private String email;
 	
+	@NotEmpty
 	@Column(name="role")
 	private String role;
 	
-	@OneToMany(targetEntity=Order.class, mappedBy="UserToOrder", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToMany(targetEntity=Order.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<Order> orders;
 
 	public long getId() {
