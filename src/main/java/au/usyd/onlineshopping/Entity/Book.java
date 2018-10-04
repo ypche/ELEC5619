@@ -1,11 +1,15 @@
 package au.usyd.onlineshopping.Entity;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Book implements Serializable{
@@ -29,6 +33,9 @@ public class Book implements Serializable{
 	private double price;
 	
 	private String bookpath;
+	
+	@OneToMany(targetEntity=OrderItem.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<OrderItem> orderItems;
 	
 	public String getBookpath() {
 		return bookpath;
@@ -104,6 +111,14 @@ public class Book implements Serializable{
 		this.description = description;
 	}
 	
+	public List<OrderItem> getOrderItems() {
+		return orderItems;
+	}
+
+	public void setOrderItems(List<OrderItem> orderItems) {
+		this.orderItems = orderItems;
+	}
+
 	@Override
 	public String toString() {
 		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", genre=" + genre + ", price=" + price
