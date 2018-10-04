@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import au.usyd.onlineshopping.Entity.Order;
 import au.usyd.onlineshopping.Entity.OrderItem;
 
-public class OrderItemImplement implements OrderItemDao {
+public class OrderItemDaoImplement implements OrderItemDao {
 
 	@Autowired
 	public SessionFactory sessionFactory;
@@ -23,23 +23,24 @@ public class OrderItemImplement implements OrderItemDao {
 	@Override
 	public List<OrderItem> getOrderItemsByOrder(Order order) {
 		// TODO Auto-generated method stub
-		/*Criteria criteria = getSession().createCriteria(OrderItem.class);
+		Criteria criteria = getSession().createCriteria(OrderItem.class);
 		criteria.add(Restrictions.eq("order", order));
 		List<OrderItem> items = criteria.list();
-		return items;*/
-		return null;
+		return items;
+		/*return null;*/
 	}
 
 	@Override
 	public void addOrderItem(OrderItem orderItem) {
 		// TODO Auto-generated method stub
-
+		getSession().save(orderItem);
 	}
 
 	@Override
 	public void deleteOrderItem(long id) {
 		// TODO Auto-generated method stub
-
+		OrderItem item = (OrderItem) getSession().get(OrderItem.class, id);
+		getSession().delete(item);
 	}
 
 }
