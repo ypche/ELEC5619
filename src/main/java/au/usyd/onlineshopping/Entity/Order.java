@@ -79,4 +79,12 @@ public class Order implements Serializable {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public List<OrderItem> getItems() {
+		return items;
+	}
+
+	public void setItems(List<OrderItem> items) {
+		this.items = items;
+	}
 }
