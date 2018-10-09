@@ -41,7 +41,8 @@ public class BookController {
 	
 	@RequestMapping(value = "/addBook", method = RequestMethod.GET)
 	public ModelAndView addBook() {
-		ModelAndView model = new ModelAndView("addBook");
+	 	ModelAndView model = new ModelAndView("addBook");
+//		ModelAndView model = new ModelAndView("index");
 		Book book = new Book();
 		model.addObject("bookForm",book);
 		return model;
