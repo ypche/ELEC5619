@@ -58,6 +58,15 @@ public class BookController {
 		return model;
 	}
 	
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ModelAndView getBookById(@PathVariable("id") long id) {
+		ModelAndView model = new ModelAndView("bookDetail");
+		Book book = (Book)bookService.getBookById(id);
+		model.addObject("book",book);
+		return model;
+	}
+	
 //	@RequestMapping(value = "/saveBook", method = RequestMethod.POST)
 //	public String saveBook(@ModelAttribute Book book) {
 //		bookService.addBook(book);
