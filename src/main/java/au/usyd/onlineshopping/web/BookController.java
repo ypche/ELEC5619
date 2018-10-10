@@ -6,6 +6,8 @@ import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -33,6 +35,15 @@ public class BookController {
 	
 	@RequestMapping(value = "/getAllBooks", method = RequestMethod.GET)
 	public ModelAndView list() {
+		ModelAndView model = new ModelAndView("index");
+		List<Book> list = bookService.getBooks();
+		model.addObject("list",list);
+		return model;
+	}
+	
+	
+	@RequestMapping(value = "/manageBooks", method = RequestMethod.GET)
+	public ModelAndView manageBook() {
 		ModelAndView model = new ModelAndView("booklist");
 		List<Book> list = bookService.getBooks();
 		model.addObject("list",list);
@@ -41,8 +52,7 @@ public class BookController {
 	
 	@RequestMapping(value = "/addBook", method = RequestMethod.GET)
 	public ModelAndView addBook() {
-	 	ModelAndView model = new ModelAndView("addBook");
-//		ModelAndView model = new ModelAndView("index");
+		ModelAndView model = new ModelAndView("addBook");
 		Book book = new Book();
 		model.addObject("bookForm",book);
 		return model;
@@ -60,9 +70,8 @@ public class BookController {
 		//get original file name
 		String originalName = imgFile.getOriginalFilename();
 		if(imgFile!=null && originalName!=null && originalName.length()>0){
-//			String pic_path = "/image/book_pic/";
-			
-			String pic_path = "/Users/dan/git/ELEC5619/image/";
+			String pic_path = "/Users/dan/git/elec5619/image/";
+			System.out.println(pic_path);
 			String newFileName = UUID.randomUUID().toString()+originalName.substring(originalName.lastIndexOf("."));
 			//new picture
 			File newFile = new File(pic_path+newFileName);
@@ -77,7 +86,7 @@ public class BookController {
 	@RequestMapping(value = "/delete/{id}")
 	public String deleteBook(@PathVariable("id") long id) {
 		bookService.deleteBook(id);
-		return "redirect:/book/getAllBooks";
+		return "redirect:/book/manageBooks";
 	}
 	
 	@RequestMapping(value = "/genre/{genre}")
