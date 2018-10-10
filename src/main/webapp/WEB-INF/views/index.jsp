@@ -72,6 +72,10 @@
             <a href="#" class="btn btn-primary my-2">Main call to action</a>
             <a href="#" class="btn btn-secondary my-2">Secondary action</a>
           </p>
+          <form class="input-group" action="search/${keyword}">
+			<input type="text" class="form-control input-lg"  method="post" name="keyword"  >
+			<button class="input-group-addon btn btn-primary" type="submit" > Search</button>
+		  </form>
         </div>
       </section>
 
@@ -87,6 +91,12 @@
 					</c:if>
 	<!--                 <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap"> -->
 	                <div class="card-body">
+	                 <p class="card-text" style="color: navy; font-family: sans-serif; font-weight: bold;">${book.title}</p>
+	                 <div  align="right">
+	                 	Author:<span class="card-text" style="color:activeborder; font-family: sans-serif;"> ${book.author}</span>
+	                 </div>
+	                 <hr>
+	                  <p class="card-text" style="font-weight:600; font-family: sans-serif;">Description:</p>
 	                  <p class="card-text">${book.description}</p>
 	                  <div class="d-flex justify-content-between align-items-center">
 	                    <div class="btn-group">

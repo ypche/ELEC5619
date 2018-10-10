@@ -9,6 +9,7 @@
 		<param-value>/WEB-INF/spring/root-context.xml</param-value>
 	</context-param>
 	
+	
 	<servlet-mapping >
     	 <servlet-name >default </servlet-name >             
 		 <url-pattern >*.css</url-pattern>        
