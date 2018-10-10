@@ -108,7 +108,7 @@
 	                  <p class="card-text">${book.description}</p> --%>
 	                  <div class="d-flex justify-content-between align-items-center">
 	                    <div class="btn-group">
-	                      <button type="button" class="btn btn-sm btn-outline-secondary">Add Wishlist</button>
+	                      <button type="button" class="btn btn-sm btn-outline-secondary">To Wishlist</button>
 	                      <button type="button" class="btn btn-sm btn-outline-secondary">Add Cart</button>
 	                    </div>
 	                    <small class="text-muted">Price: $${book.price}</small>

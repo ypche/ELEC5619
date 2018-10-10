@@ -58,7 +58,7 @@
 					<h4 style="font: bold;color:olive; padding-left: 60px; ">price: &nbsp;&nbsp;<span style="color: red;">$${book.price}</span></h4>
 					  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp;
 					 <div class="btn-group">
-	                      <button type="button" class="btn btn-sm btn-outline-secondary">Add Wishlist</button>
+	                      <button type="button" class="btn btn-sm btn-outline-secondary">To Wishlist</button>
 	                      <button type="button" class="btn btn-sm btn-outline-secondary">Add Cart</button>
                     </div>
 				</div>
