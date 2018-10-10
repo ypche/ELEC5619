@@ -32,4 +32,11 @@ public class UserServiceImpl implements UserService {
 		userDao.deleteUser(id);
 	}
 
+	@Override
+	public long login(User user) {
+		// TODO Auto-generated method stub
+		long id = userDao.login(user);
+		return id;
+	}
+
 }

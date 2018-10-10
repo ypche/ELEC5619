@@ -30,4 +30,21 @@ public class UserController {
 		userService.addUser(user);
 		return "redirect:/book/getAllBooks";
 	}
+	
+	@RequestMapping(value="/login", method=RequestMethod.GET)
+	public ModelAndView login() {
+		ModelAndView model = new ModelAndView("login");
+		User user = new User();
+		model.addObject("userForm", user);
+		return model;
+	}
+	
+	@RequestMapping(value="/loginUser", method=RequestMethod.POST)
+	public String loginUser(@ModelAttribute User user) {
+		long id = userService.login(user);
+		if (id > 0)
+			return "redirect:/book/getAllBooks";
+		else
+			return "redirect:/user/login";
+	}
 }

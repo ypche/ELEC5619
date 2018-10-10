@@ -1,7 +1,11 @@
 package au.usyd.onlineshopping.dao;
 
+import java.util.List;
+
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -35,6 +39,21 @@ public class UserDaoImplement implements UserDao {
 		// TODO Auto-generated method stub
 		User user = (User) getSession().get(User.class, id);
 		getSession().delete(user);
+	}
+
+	@Override
+	public long login(User user) {
+		// TODO Auto-generated method stub
+		String name = user.getName();
+		String password = user.getPassword();
+		Criteria criteria = getSession().createCriteria(User.class);
+		criteria.add(Restrictions.eq("name", name));
+		criteria.add(Restrictions.eq("password", password));
+		List<User> list = criteria.list();
+		if (list.size() > 0)
+			return list.get(0).getId();
+		else
+			return -1;
 	}
 
 }

@@ -10,15 +10,10 @@
 <title>Register</title>
 </head>
 <body>
-<spring:url value="/user/saveUser" var="addURL"/>
-    <h3>Register New Account</</h3>
-    <form:form action="${addURL}" method="post" modelAttribute="userForm" enctype="multipart/form-data">
+<spring:url value="/user/loginUser" var="loginURL"/>
+    <h3>Login</</h3>
+    <form:form action="${loginURL}" method="post" modelAttribute="userForm" enctype="multipart/form-data">
         <table>
-            <form:hidden path="id" />
-            <tr>
-                <td>email:</td>
-                <td><form:input path="email" /></td>
-            </tr>
             <tr>
                 <td>name:</td>
                 <td><form:input path="name" /></td>
@@ -27,13 +22,9 @@
                 <td>password:</td>
                 <td><form:password path="password" /></td>
             </tr>
-            <tr>
-                <td>role:</td>
-                <td><form:input path="role" /></td>
-            </tr>
-                    
-            <tr>
-                <td><input type="submit" value="Register" /></td>
+            
+			<tr>
+                <td><input type="submit" value="Login" /></td>
             </tr>
         </table>
     </form:form>

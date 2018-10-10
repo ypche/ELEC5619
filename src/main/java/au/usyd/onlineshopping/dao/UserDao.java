@@ -8,4 +8,5 @@ public interface UserDao {
 	
 	public void addUser(User user);
 	public void deleteUser(long id);
+	public long login(User user);
 }
