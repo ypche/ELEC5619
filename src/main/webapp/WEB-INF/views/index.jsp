@@ -64,14 +64,22 @@
 
     <main role="main">
 
-      <section class="jumbotron text-center">
+      <section class="jumbotron text-center" >
         <div class="container">
           <h1 class="jumbotron-heading">HappyReader</h1>
           <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
-          <p>
-            <a href="#" class="btn btn-primary my-2">Main call to action</a>
-            <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-          </p>
+		
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  			<a class="navbar-brand" href="#">Category</a>		
+	  		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+	   			 <div class="navbar-nav">
+				      <a class="nav-item nav-link col-sm-5" href="<%=basePath %>book/genre/children">Children</a>
+				      <a class="nav-item nav-link col-sm-5" href="<%=basePath %>book/genre/Science">Science</a>
+				      <a class="nav-item nav-link col-sm-5" href="<%=basePath %>book/genre/Toolbook">Toolbook</a>
+				      <a class="nav-item nav-link col-sm-5" href="<%=basePath %>book/genre/Family">Family</a>
+	   			 </div>
+	  		</div>
+		</nav>
           <form class="input-group" action="search/${keyword}">
 			<input type="text" class="form-control input-lg"  method="post" name="keyword"  >
 			<button class="input-group-addon btn btn-primary" type="submit" > Search</button>
@@ -92,12 +100,12 @@
 	<!--                 <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap"> -->
 	                <div class="card-body">
 	                 <p class="card-text" style="color: navy; font-family: sans-serif; font-weight: bold;">${book.title}</p>
-	                 <div  align="right">
+	                 <div >
 	                 	Author:<span class="card-text" style="color:activeborder; font-family: sans-serif;"> ${book.author}</span>
 	                 </div>
 	                 <hr>
-	                  <p class="card-text" style="font-weight:600; font-family: sans-serif;">Description:</p>
-	                  <p class="card-text">${book.description}</p>
+	                 <%--  <p class="card-text" style="font-weight:600; font-family: sans-serif;">Description:</p>
+	                  <p class="card-text">${book.description}</p> --%>
 	                  <div class="d-flex justify-content-between align-items-center">
 	                    <div class="btn-group">
 	                      <button type="button" class="btn btn-sm btn-outline-secondary">Add Wishlist</button>
