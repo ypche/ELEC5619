@@ -23,7 +23,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import au.usyd.onlineshopping.Entity.Book;
+import au.usyd.onlineshopping.Entity.PageBean;
 import au.usyd.onlineshopping.service.BookService;
+import au.usyd.onlineshopping.service.PageBeanService;
 
 
 @Controller
@@ -31,15 +33,30 @@ import au.usyd.onlineshopping.service.BookService;
 public class BookController {
 	
 	@Autowired
-	public BookService bookService;
+	public BookService bookService;	
+	@Autowired
+	public PageBeanService pageBeanService;	
 	
-	@RequestMapping(value = "/getAllBooks", method = RequestMethod.GET)
-	public ModelAndView list() {
+//	@RequestMapping(value = "/getBooks", method = RequestMethod.GET)
+//	public ModelAndView list() {
+//		ModelAndView model = new ModelAndView("index");
+//		List<Book> list = bookService.getBooks();
+//		model.addObject("list",list);
+//		return model;
+//	}
+	
+	@RequestMapping(value = "/getBooks", method = RequestMethod.GET)
+	public ModelAndView list(HttpServletRequest request, HttpServletResponse response) {
+		String pageNum = request.getParameter("pageNum");
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		PageBean<Book> pb = pageBeanService.getBookWithPage(Integer.parseInt(pageNum));	
 		ModelAndView model = new ModelAndView("index");
-		List<Book> list = bookService.getBooks();
-		model.addObject("list",list);
+		model.addObject("pageBean",pb);
 		return model;
 	}
+
 	
 	
 	@RequestMapping(value = "/manageBooks", method = RequestMethod.GET)
@@ -84,7 +101,6 @@ public class BookController {
 			String newFileName = UUID.randomUUID().toString()+originalName.substring(originalName.lastIndexOf("."));
 			//new picture
 			File newFile = new File(pic_path+newFileName);
-//			book.setImage(pic_path+newFileName);
 			imgFile.transferTo(newFile);
 			bookService.addBook(book,newFileName);
 			

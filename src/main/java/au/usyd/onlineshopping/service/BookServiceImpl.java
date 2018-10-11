@@ -57,4 +57,10 @@ public class BookServiceImpl implements BookService{
 		return bookDao.getBooks();
 	}
 
+	@Override
+	public List<Book> getBookByPage(int startIndex, int pageSize) {
+		// TODO Auto-generated method stub
+		return bookDao.getBookByPage(startIndex, pageSize);
+	}
+
 }

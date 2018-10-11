@@ -71,6 +71,15 @@ public class BookDaoImplement implements BookDao{
 		Criteria criteria = getSession().createCriteria(Book.class);		
 		return (List<Book>)criteria.list();
 	}
+	
+	
+	//根据页数查找书
+	@Override
+	public List<Book> getBookByPage(int startIndex, int pageSize) {
+		Query query = getSession().createQuery("from Book").setFirstResult(startIndex).setMaxResults(pageSize);
+		List<Book> list = query.list();
+		return list;
+	}
 
 }
 

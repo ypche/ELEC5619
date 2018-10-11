@@ -91,7 +91,7 @@
         <div class="container">
 
           <div class="row">
-         	<c:forEach items="${list}" var="book">
+         	<c:forEach items="${requestScope.pageBean.list}" var="book">
 	            <div class="col-md-4">
 	              <div class="card mb-4 box-shadow">
               		<c:if test="${book.image!=null}">
@@ -120,26 +120,79 @@
           </div>
         </div>
       </div>
+      
+     <!-- --------------------------------分页功能--------------------------------- --> 
+    <div class="container" align="center">
+		<%-- 构建分页导航 --%>
+		<p style="font-weight: bold;">Total book number:<span style="color: olive;">${requestScope.pageBean.totalRecord}</span></p> 
+		<p style="font-weight: bold;">Total Pages:<span style="color: olive;">${requestScope.pageBean.totalPage}</span></p> 
+		<p style="font-weight: bold;">Current Page:<span style="color: olive;">${requestScope.pageBean.pageNum}</span></p> 
+		
+		<button><a	href="${pageContext.request.contextPath}/book/getBooks?pageNum=1">First Page</a></button>	
+		<%--如果当前页为第一页时，就没有上一页这个超链接显示 --%>	
+			<c:if test="${requestScope.pageBean.pageNum ==1}">		
+				<c:forEach begin="${requestScope.pageBean.start}"			
+					end="${requestScope.pageBean.end}" step="1" var="i">			
+					<c:if test="${requestScope.pageBean.pageNum == i}">                        
+						${i}                   
+					</c:if>			
+				 	<c:if test="${requestScope.pageBean.pageNum != i}">				
+					 	<a	href="${pageContext.request.contextPath}/book/getBooks?pageNum=${i}">${i}</a>			
+					</c:if>		
+			 	</c:forEach>		
+				 	<a	href="${pageContext.request.contextPath}/book/getBooks?pageNum=${requestScope.pageBean.pageNum+1}">Next</a>	
+		 	</c:if>
+		 	
+		 	<%--如果当前页不是第一页也不是最后一页，则有上一页和下一页这个超链接显示 --%>	
+		 	<c:if test="${requestScope.pageBean.pageNum > 1 && requestScope.pageBean.pageNum < requestScope.pageBean.totalPage}">	
+		 		<a	href="${pageContext.request.contextPath}/book/getBooks?pageNum=${requestScope.pageBean.pageNum-1}">Previous</a>		
+		 		<c:forEach begin="${requestScope.pageBean.start}" end="${requestScope.pageBean.end}" step="1" var="i">
+		 			<c:if test="${requestScope.pageBean.pageNum == i}">
+		 			  ${i} 
+		 			</c:if>			
+			 		<c:if test="${requestScope.pageBean.pageNum != i}">			
+			 			<a	href="${pageContext.request.contextPath}/book/getBooks?pageNum=${i}">${i}</a>
+			 		</c:if>		
+			   </c:forEach>		
+			   	<a href="${pageContext.request.contextPath}/book/getBooks?pageNum=${requestScope.pageBean.pageNum+1}">Next</a>
+		     </c:if>
+		     
+		    <%--如果当前页是最后一页，则有上一页超链接显示 --%>	
+		 	<c:if test="${requestScope.pageBean.pageNum == requestScope.pageBean.totalPage}">	
+		 		<a	href="${pageContext.request.contextPath}/book/getBooks?pageNum=${requestScope.pageBean.pageNum-1}">Previous</a>		
+		 		<c:forEach begin="${requestScope.pageBean.start}" end="${requestScope.pageBean.end}" step="1" var="i">
+		 			<c:if test="${requestScope.pageBean.pageNum == i}">
+		 			  ${i} 
+		 			</c:if>			
+			 		<c:if test="${requestScope.pageBean.pageNum != i}">			
+			 			<a	href="${pageContext.request.contextPath}/book/getBooks?pageNum=${i}">${i}</a>
+			 		</c:if>		
+			   </c:forEach>	
+		     </c:if>
+		     
+		     <%--尾页 --%>
+		<button><a href="${pageContext.request.contextPath}/book/getBooks?pageNum=${requestScope.pageBean.totalPage}">Last Page</a></button>
+	     
+	 </div> 
+	 
+	   <!-- --------------------------------分页功能--------------------------------- --> 
 
     </main>
 
-    <footer class="text-muted">
+	<br><br><br>
+    <footer class="footerCus">
       <div class="container">
-        <p class="float-right">
-          <a href="#">Back to top</a>
-        </p>
         <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-        <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
+        <p>New to Bootstrap? Visit the homepage or read our getting started guide.</p>
       </div>
     </footer>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
+    <!-- Bootstrap core JavaScript ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
   	<script src="<%=basePath %>js/popper.min.js"></script> 
     <script src="<%=basePath %>js/bootstrap.min.js"></script>
-	<<script src="<%=basePath %>js/holder.min.js"></script> 
+	<script src="<%=basePath %>js/holder.min.js"></script> 
   </body>
 </html>
