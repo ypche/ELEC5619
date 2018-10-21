@@ -9,6 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>add books</title>
 </head>
+
 <body>
 <spring:url value="/book/saveBook" var="addURL"/>
 <%-- <a href="${addURL}">save a Book</a> --%>

@@ -104,6 +104,7 @@ public class BookController {
 			imgFile.transferTo(newFile);
 			bookService.addBook(book,newFileName);
 			
+			
 		}
 		return "redirect:/book/getAllBooks";
 	}
