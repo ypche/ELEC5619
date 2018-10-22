@@ -1,5 +1,6 @@
 package au.usyd.onlineshopping.dao;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -40,6 +41,16 @@ public class OrderDaoImplement implements OrderDao {
 		// TODO Auto-generated method stub
 		Criteria criteria = getSession().createCriteria(Order.class);		
 		return (List<Order>)criteria.list();
+	}
+
+	@Override
+	public Order addOrder(User user) {
+		// TODO Auto-generated method stub
+		Order order = new Order();
+		order.setOrderDate(Calendar.getInstance().getTime());
+		order.setUserID(user);
+		getSession().save(order);
+		return order;
 	}
 
 }

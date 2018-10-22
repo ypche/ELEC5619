@@ -35,4 +35,11 @@ public class OrderServiceImpl implements OrderService {
 		return orderDao.getAllOrders();
 	}
 
+	@Override
+	public Order addOrder(User user) {
+		// TODO Auto-generated method stub
+		Order order = orderDao.addOrder(user);
+		return order;
+	}
+
 }
