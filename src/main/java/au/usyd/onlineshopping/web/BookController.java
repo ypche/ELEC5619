@@ -106,7 +106,7 @@ public class BookController {
 			
 			
 		}
-		return "redirect:/book/getAllBooks";
+        return "redirect:/book/getBooks";
 	}
 	
 	@RequestMapping(value = "/delete/{id}")

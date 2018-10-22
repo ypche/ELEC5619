@@ -8,6 +8,9 @@
 <html>
 <head>
 	<title>Books</title>
+	<script type="text/javascript">
+	
+	</script>
 </head>
 <body>
 <spring:url value="/book/addBook" var="addURL"/>
@@ -17,7 +20,7 @@
 	<input type="text" method="post" name="keyword" >
 	<button type="submit"  ></button>
 </form>
-<table>
+<table class="table table-bordered">
 	<tr>
 		<td>title</td>
 		<td>author</td>
