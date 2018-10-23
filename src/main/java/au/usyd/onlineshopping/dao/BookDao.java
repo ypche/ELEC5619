@@ -29,6 +29,8 @@ public interface BookDao {
 	
 	public List<Book> getBooks();
 	
+	public List<Book> getBookByPage(int startIndex, int pageSize);
+	
 
 	
 

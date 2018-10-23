@@ -42,6 +42,9 @@ public class User implements Serializable {
 	@OneToMany(targetEntity=Order.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<Order> orders;
 	
+	@OneToMany(targetEntity=OrderItem.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<OrderItem> orderItems;
+
 	public long getId() {
 		return id;
 	}
@@ -88,5 +91,13 @@ public class User implements Serializable {
 
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
+	}
+
+	public List<OrderItem> getOrderItems() {
+		return orderItems;
+	}
+
+	public void setOrderItems(List<OrderItem> orderItems) {
+		this.orderItems = orderItems;
 	}
 }

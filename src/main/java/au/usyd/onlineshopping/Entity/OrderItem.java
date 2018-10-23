@@ -21,12 +21,12 @@ public class OrderItem implements Serializable {
 	private long id;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="order_id")
-	private Order order;
+	@JoinColumn(name="user_id")
+	private User userID;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="book_id")
-	private Book book;
+	private Book bookID;
 
 	public long getId() {
 		return id;
@@ -36,19 +36,19 @@ public class OrderItem implements Serializable {
 		this.id = id;
 	}
 
-	public Order getOrderID() {
-		return order;
+	public User getUserID() {
+		return userID;
 	}
 
-	public void setOrderID(Order orderID) {
-		this.order = orderID;
+	public void setUserID(User userID) {
+		this.userID = userID;
 	}
 
 	public Book getBookID() {
-		return book;
+		return bookID;
 	}
 
 	public void setBookID(Book bookID) {
-		this.book = bookID;
+		this.bookID = bookID;
 	}
 }

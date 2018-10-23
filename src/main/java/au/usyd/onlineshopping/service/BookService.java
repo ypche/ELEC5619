@@ -29,4 +29,6 @@ public interface BookService {
 	
 	public void addBook(Book book, String newFileName);
 	
+	public List<Book> getBookByPage(int startIndex, int pageSize);
+	
 }

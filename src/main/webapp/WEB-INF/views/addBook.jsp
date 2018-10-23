@@ -27,7 +27,13 @@
             </tr>
             <tr>
                 <td>genre:</td>
-                <td><form:input path="genre" /></td>
+                <td><form:select path="genre" id="gen" method="POST">
+				  <option value ="Children">Children</option>
+				  <option value ="Science">Science</option>
+				  <option value="Family">Family</option>
+				  <option value="Toolbook">Toolbook</option>
+				</form:select>
+				</td>
             </tr>
             <tr>
                 <td>price:</td>

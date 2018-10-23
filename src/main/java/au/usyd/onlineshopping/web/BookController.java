@@ -6,6 +6,8 @@ import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,7 +23,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import au.usyd.onlineshopping.Entity.Book;
+import au.usyd.onlineshopping.Entity.PageBean;
 import au.usyd.onlineshopping.service.BookService;
+import au.usyd.onlineshopping.service.PageBeanService;
 
 
 @Controller
@@ -29,10 +33,34 @@ import au.usyd.onlineshopping.service.BookService;
 public class BookController {
 	
 	@Autowired
-	public BookService bookService;
+	public BookService bookService;	
+	@Autowired
+	public PageBeanService pageBeanService;	
 	
-	@RequestMapping(value = "/getAllBooks", method = RequestMethod.GET)
-	public ModelAndView list() {
+//	@RequestMapping(value = "/getBooks", method = RequestMethod.GET)
+//	public ModelAndView list() {
+//		ModelAndView model = new ModelAndView("index");
+//		List<Book> list = bookService.getBooks();
+//		model.addObject("list",list);
+//		return model;
+//	}
+	
+	@RequestMapping(value = "/getBooks", method = RequestMethod.GET)
+	public ModelAndView list(HttpServletRequest request, HttpServletResponse response) {
+		String pageNum = request.getParameter("pageNum");
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		PageBean<Book> pb = pageBeanService.getBookWithPage(Integer.parseInt(pageNum));	
+		ModelAndView model = new ModelAndView("index");
+		model.addObject("pageBean",pb);
+		return model;
+	}
+
+	
+	
+	@RequestMapping(value = "/manageBooks", method = RequestMethod.GET)
+	public ModelAndView manageBook() {
 		ModelAndView model = new ModelAndView("booklist");
 		List<Book> list = bookService.getBooks();
 		model.addObject("list",list);
@@ -44,6 +72,15 @@ public class BookController {
 		ModelAndView model = new ModelAndView("addBook");
 		Book book = new Book();
 		model.addObject("bookForm",book);
+		return model;
+	}
+	
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ModelAndView getBookById(@PathVariable("id") long id) {
+		ModelAndView model = new ModelAndView("bookDetail");
+		Book book = (Book)bookService.getBookById(id);
+		model.addObject("book",book);
 		return model;
 	}
 	
@@ -59,13 +96,11 @@ public class BookController {
 		//get original file name
 		String originalName = imgFile.getOriginalFilename();
 		if(imgFile!=null && originalName!=null && originalName.length()>0){
-//			String pic_path = "/image/book_pic/";
-			
-			String pic_path = "/Users/dan/git/ELEC5619/image/";
+			String pic_path = "/Users/dan/git/elec5619/image/";
+			System.out.println(pic_path);
 			String newFileName = UUID.randomUUID().toString()+originalName.substring(originalName.lastIndexOf("."));
 			//new picture
 			File newFile = new File(pic_path+newFileName);
-//			book.setImage(pic_path+newFileName);
 			imgFile.transferTo(newFile);
 			bookService.addBook(book,newFileName);
 			
@@ -76,7 +111,7 @@ public class BookController {
 	@RequestMapping(value = "/delete/{id}")
 	public String deleteBook(@PathVariable("id") long id) {
 		bookService.deleteBook(id);
-		return "redirect:/book/getAllBooks";
+		return "redirect:/book/manageBooks";
 	}
 	
 	@RequestMapping(value = "/genre/{genre}")
