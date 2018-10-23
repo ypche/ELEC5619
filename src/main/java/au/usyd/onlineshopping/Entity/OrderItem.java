@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="OrderItems")
@@ -27,6 +28,12 @@ public class OrderItem implements Serializable {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="book_id")
 	private Book book;
+	
+	@Transient
+	private String bookTitle;
+	
+	@Transient
+	private double bookPrice;
 
 	public long getId() {
 		return id;
@@ -36,19 +43,35 @@ public class OrderItem implements Serializable {
 		this.id = id;
 	}
 
-	public Order getOrderID() {
+	public Order getOrder() {
 		return order;
 	}
 
-	public void setOrderID(Order orderID) {
-		this.order = orderID;
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 
-	public Book getBookID() {
+	public Book getBook() {
 		return book;
 	}
 
-	public void setBookID(Book bookID) {
-		this.book = bookID;
+	public void setBook(Book book) {
+		this.book = book;
+	}
+
+	public String getBookTitle() {
+		return bookTitle;
+	}
+
+	public void setBookTitle(String bookTitle) {
+		this.bookTitle = bookTitle;
+	}
+
+	public double getBookPrice() {
+		return bookPrice;
+	}
+
+	public void setBookPrice(double bookPrice) {
+		this.bookPrice = bookPrice;
 	}
 }

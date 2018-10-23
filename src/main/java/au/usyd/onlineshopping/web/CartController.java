@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import au.usyd.onlineshopping.Entity.Order;
+import au.usyd.onlineshopping.Entity.OrderItem;
 import au.usyd.onlineshopping.Entity.User;
+import au.usyd.onlineshopping.service.OrderItemService;
 import au.usyd.onlineshopping.service.OrderService;
 import au.usyd.onlineshopping.service.UserService;
 
@@ -28,6 +30,8 @@ public class CartController {
 	public OrderService orderService;
 	@Autowired
 	public UserService userService;
+	@Autowired
+	public OrderItemService itemService;
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public ModelAndView cart(HttpSession session) {
@@ -49,7 +53,12 @@ public class CartController {
 		orderList.add(order);
 		model.addObject("OrderDetail", orderList);
 		
-		
+		List<OrderItem> itemList = itemService.getOrderItemsByOrder(order);
+		for (OrderItem item : itemList) {
+			item.setBookTitle(item.getBook().getTitle());
+			item.setBookPrice(item.getBook().getPrice());
+		}
+		model.addObject("ItemList", itemList);
 		return model;
 	}
 }
