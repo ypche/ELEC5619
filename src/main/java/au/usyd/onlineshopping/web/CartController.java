@@ -1,9 +1,12 @@
 package au.usyd.onlineshopping.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,20 +22,34 @@ import au.usyd.onlineshopping.service.UserService;
 @RequestMapping("/cart")
 public class CartController {
 
+	protected final Log logger = LogFactory.getLog(getClass());
+	
 	@Autowired
 	public OrderService orderService;
+	@Autowired
 	public UserService userService;
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public ModelAndView cart(HttpSession session) {
 		ModelAndView model = new ModelAndView("cart");
+		if (session.getAttribute("userID") == null) {
+			model = new ModelAndView("login");
+			User user = new User();
+			model.addObject("userForm", user);
+			return model;
+		}
 		long userID = (Long) session.getAttribute("userID");
 		User currentUser = userService.getUserById(userID);
-		Order orderList = orderService.getOrderByUser(currentUser);
-		if (orderList == null) {
-			orderList = orderService.addOrder(currentUser);
+		Order order = orderService.getOrderByUser(userID);
+		if (order == null) {
+			order = orderService.addOrder(currentUser);
 		}
-		model.addObject("list", orderList);
+		order.setUserName(currentUser.getName());
+		List<Order> orderList = new ArrayList<Order>();
+		orderList.add(order);
+		model.addObject("OrderDetail", orderList);
+		
+		
 		return model;
 	}
 }

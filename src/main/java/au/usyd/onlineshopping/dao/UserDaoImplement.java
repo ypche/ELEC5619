@@ -2,6 +2,8 @@ package au.usyd.onlineshopping.dao;
 
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -14,6 +16,8 @@ import au.usyd.onlineshopping.Entity.User;
 @Repository
 public class UserDaoImplement implements UserDao {
 
+	protected final Log logger = LogFactory.getLog(getClass());
+	
 	@Autowired
 	public SessionFactory sessionFactory;
 	
@@ -24,7 +28,9 @@ public class UserDaoImplement implements UserDao {
 	@Override
 	public User getUserById(long id) {
 		// TODO Auto-generated method stub
+		logger.info("User Dao: id = " + id);
 		User user = (User) getSession().get(User.class, id);
+		logger.info("User Dao: user name = " + user.getName());
 		return user;
 	}
 

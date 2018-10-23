@@ -24,9 +24,9 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Order getOrderByUser(User user) {
+	public Order getOrderByUser(long userID) {
 		// TODO Auto-generated method stub
-		return orderDao.getOrderByUser(user);
+		return orderDao.getOrderByUser(userID);
 	}
 
 	@Override

@@ -30,9 +30,9 @@ public class OrderDaoImplement implements OrderDao {
 	}
 
 	@Override
-	public Order getOrderByUser(User user) {
+	public Order getOrderByUser(long userID) {
 		// TODO Auto-generated method stub
-		Order order = (Order) getSession().get(Order.class, user);
+		Order order = (Order) getSession().get(Order.class, userID);
 		return order;
 	}
 
@@ -49,6 +49,7 @@ public class OrderDaoImplement implements OrderDao {
 		Order order = new Order();
 		order.setOrderDate(Calendar.getInstance().getTime());
 		order.setUserID(user);
+		order.setUserName(user.getName());
 		getSession().save(order);
 		return order;
 	}

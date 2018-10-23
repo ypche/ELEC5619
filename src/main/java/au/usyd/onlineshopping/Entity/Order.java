@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="Orders")
@@ -36,6 +37,9 @@ public class Order implements Serializable {
 	
 	@Column(name="status")
 	private String status;
+	
+	@Transient
+	private String userName;
 	
 	@OneToMany(targetEntity=OrderItem.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<OrderItem> items;
@@ -86,5 +90,13 @@ public class Order implements Serializable {
 
 	public void setItems(List<OrderItem> items) {
 		this.items = items;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 }
