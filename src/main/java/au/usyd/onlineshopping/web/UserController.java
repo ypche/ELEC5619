@@ -47,7 +47,7 @@ public class UserController {
 		if (id > 0)
 		{
 			session.setAttribute("userID", id);
-			return "redirect:/book/getAllBooks";
+			return "redirect:/book/getBooks";
 		}
 		else
 			return "redirect:/user/login";
