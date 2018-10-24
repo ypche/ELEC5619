@@ -8,6 +8,33 @@
 <html>
 <head>
 	<title>Shopping Cart</title>
+	<script type="text/javascript">
+		function buyCheckedItems() {
+			var cks = document.getElementsByName("checkIds");
+			var str = "";
+			for (var i = 0; i < cks.length; i++) {
+				if (cks[i].checked) {
+					str += cks[i].value + ",";
+				}
+			}
+			str = str.substring(0, str.length - 1);
+			if (str == "") {
+				return;
+			}
+			window.location.href = "buyItems/" + str;
+		}
+		
+		function checkAllItems() {
+			var ckAll = document.getElementsByName("checkAll");
+			var cks = document.getElementsByName("checkIds");
+			for (var i = 0; i < cks.length; i++) {
+				if (ckAll[0].checked)
+					cks[i].checked = true;
+				else
+					cks[i].checked = false;
+			}
+		}
+	</script>
 </head>
 <body>
 <table>
@@ -21,12 +48,14 @@
 	</c:forEach>
 	
 	<tr>
+		<td><input type="checkbox" name="checkAll" onClick="checkAllItems()"></td>
 		<td>Book Title</td>
 		<td>Book Price</td>
 		<td>Operation</td>
 	</tr>
 	<c:forEach items="${ItemList}" var="orderItem">
 		<tr>
+			<td><input type="checkbox" id="checkIds" name="checkIds" value="${orderItem.id}"></td>
 			<td>${orderItem.bookTitle}</td>
 			<td>${orderItem.bookPrice}</td>
 			<td>
@@ -36,6 +65,12 @@
 		</tr>
 	
 	</c:forEach>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td><input type="submit" onClick="buyCheckedItems()" value="Buy Now"></td>
+	</tr>
 </table>	
 </body>
 </html>
