@@ -28,9 +28,14 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/saveUser", method=RequestMethod.POST)
-	public String saveUser(@ModelAttribute User user) {
-		userService.addUser(user);
-		return "redirect:/book/getAllBooks";
+	public String saveUser(@ModelAttribute User user, HttpSession session) {
+		long id = userService.addUser(user);
+		if (id > 0)
+		{
+			session.setAttribute("userID", id);
+			return "redirect:/book/getBooks";
+		}
+		return "redirect:/user/register";
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
