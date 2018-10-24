@@ -12,4 +12,5 @@ public interface OrderItemService {
 	public void deleteOrderItem(long id);
 	public String getBookTitleOfItem(OrderItem item);
 	public double getBookPriceOfItem(OrderItem item);
+	public void addOrderItem(long bookID, Order order);
 }

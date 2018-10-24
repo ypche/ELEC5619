@@ -11,6 +11,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import au.usyd.onlineshopping.Entity.Book;
 import au.usyd.onlineshopping.Entity.Order;
 import au.usyd.onlineshopping.Entity.OrderItem;
 
@@ -21,6 +22,9 @@ public class OrderItemDaoImplement implements OrderItemDao {
 	
 	@Autowired
 	public SessionFactory sessionFactory;
+	
+	@Autowired
+	public BookDao bookDao;
 	
 	protected Session getSession() {
 		return sessionFactory.getCurrentSession();
@@ -59,6 +63,16 @@ public class OrderItemDaoImplement implements OrderItemDao {
 	public double getBookPriceOfItem(OrderItem item) {
 		// TODO Auto-generated method stub
 		return item.getBook().getPrice();
+	}
+
+	@Override
+	public void addOrderItem(long bookID, Order order) {
+		// TODO Auto-generated method stub
+		Book book = bookDao.getBookById(bookID);
+		OrderItem item = new OrderItem();
+		item.setBook(book);
+		item.setOrder(order);
+		getSession().save(item);
 	}
 
 }

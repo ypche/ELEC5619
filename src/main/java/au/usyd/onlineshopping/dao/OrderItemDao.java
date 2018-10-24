@@ -12,4 +12,5 @@ public interface OrderItemDao {
 	public double getBookPriceOfItem(OrderItem item);
 	public void addOrderItem(OrderItem orderItem);
 	public void deleteOrderItem(long id);
+	public void addOrderItem(long bookID, Order order);
 }
