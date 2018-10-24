@@ -39,6 +39,9 @@ public class Book implements Serializable{
 	@OneToMany(targetEntity=OrderItem.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<OrderItem> orderItems;
 	
+	@OneToMany(targetEntity=Delivery.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<Delivery> deliveries;
+	
 	public String getBookpath() {
 		return bookpath;
 	}
@@ -126,6 +129,14 @@ public class Book implements Serializable{
 
 	public void setOrderItems(List<OrderItem> orderItems) {
 		this.orderItems = orderItems;
+	}
+
+	public List<Delivery> getDeliveries() {
+		return deliveries;
+	}
+
+	public void setDeliveries(List<Delivery> deliveries) {
+		this.deliveries = deliveries;
 	}
 
 	@Override

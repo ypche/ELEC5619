@@ -38,8 +38,12 @@ public class OrderDaoImplement implements OrderDao {
 		criteria.add(Restrictions.eq("userID", user));
 //		Order order = (Order) getSession().get(Order.class, userID);
 		List<Order> list = criteria.list();
-		Order order = list.get(0);
-		return order;
+		if (list.size() > 0) {		
+			Order order = list.get(0);
+			return order;
+		}
+		else
+			return null;
 	}
 
 	@Override

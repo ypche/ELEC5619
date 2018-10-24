@@ -1,7 +1,9 @@
 package au.usyd.onlineshopping.Entity;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -34,6 +37,9 @@ public class OrderItem implements Serializable {
 	
 	@Transient
 	private double bookPrice;
+	
+	@OneToMany(targetEntity=Delivery.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<Delivery> deliveries;
 
 	public long getId() {
 		return id;
@@ -73,5 +79,13 @@ public class OrderItem implements Serializable {
 
 	public void setBookPrice(double bookPrice) {
 		this.bookPrice = bookPrice;
+	}
+
+	public List<Delivery> getDeliveries() {
+		return deliveries;
+	}
+
+	public void setDeliveries(List<Delivery> deliveries) {
+		this.deliveries = deliveries;
 	}
 }

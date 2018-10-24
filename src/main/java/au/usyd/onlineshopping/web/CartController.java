@@ -72,12 +72,16 @@ public class CartController {
 	
 	@RequestMapping(value="/addItem/{bid}")
 	public String addOrderItem(@PathVariable("bid") long bid, HttpSession session) {
-		long userID = (Long) session.getAttribute("userID");
 		if (session.getAttribute("userID") == null) {
 			return "redirect:/user/login";
 		}
+		long userID = (Long) session.getAttribute("userID");
 		User currentUser = userService.getUserById(userID);
 		Order order = orderService.getOrderByUser(currentUser);
+		if (order == null) {
+			order = orderService.addOrder(currentUser);
+		}
+		order.setUserName(currentUser.getName());
 		itemService.addOrderItem(bid, order);
 		return "redirect:/cart/";
 	}
