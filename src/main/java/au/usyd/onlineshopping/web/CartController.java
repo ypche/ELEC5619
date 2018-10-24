@@ -74,7 +74,7 @@ public class CartController {
 	public String addOrderItem(@PathVariable("bid") long bid, HttpSession session) {
 		long userID = (Long) session.getAttribute("userID");
 		if (session.getAttribute("userID") == null) {
-			return "redirect:/user/register";
+			return "redirect:/user/login";
 		}
 		User currentUser = userService.getUserById(userID);
 		Order order = orderService.getOrderByUser(currentUser);
