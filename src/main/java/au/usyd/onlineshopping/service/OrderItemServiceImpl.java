@@ -35,4 +35,16 @@ public class OrderItemServiceImpl implements OrderItemService {
 		itemDao.deleteOrderItem(id);
 	}
 
+	@Override
+	public String getBookTitleOfItem(OrderItem item) {
+		// TODO Auto-generated method stub
+		return itemDao.getBookTitleOfItem(item);
+	}
+
+	@Override
+	public double getBookPriceOfItem(OrderItem item) {
+		// TODO Auto-generated method stub
+		return itemDao.getBookPriceOfItem(item);
+	}
+
 }

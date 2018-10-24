@@ -48,6 +48,7 @@ public class OrderDaoImplement implements OrderDao {
 		// TODO Auto-generated method stub
 		Order order = new Order();
 		order.setOrderDate(Calendar.getInstance().getTime());
+		order.setStatus("active");
 		order.setUserID(user);
 		order.setUserName(user.getName());
 		getSession().save(order);

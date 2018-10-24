@@ -9,10 +9,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import au.usyd.onlineshopping.Entity.Book;
 import au.usyd.onlineshopping.Entity.Order;
 import au.usyd.onlineshopping.Entity.OrderItem;
 import au.usyd.onlineshopping.Entity.User;
@@ -55,10 +57,16 @@ public class CartController {
 		
 		List<OrderItem> itemList = itemService.getOrderItemsByOrder(order);
 		for (OrderItem item : itemList) {
-			item.setBookTitle(item.getBook().getTitle());
-			item.setBookPrice(item.getBook().getPrice());
+			item.setBookTitle(itemService.getBookTitleOfItem(item));
+			item.setBookPrice(itemService.getBookPriceOfItem(item));
 		}
 		model.addObject("ItemList", itemList);
 		return model;
+	}
+	
+	@RequestMapping(value="/delete/{id}")
+	public String deleteOrderItem(@PathVariable("id") long id) {
+		itemService.deleteOrderItem(id);
+		return "redirect:/cart/";
 	}
 }

@@ -2,6 +2,8 @@ package au.usyd.onlineshopping.dao;
 
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,6 +17,8 @@ import au.usyd.onlineshopping.Entity.OrderItem;
 @Repository
 public class OrderItemDaoImplement implements OrderItemDao {
 
+	protected final Log logger = LogFactory.getLog(getClass());
+	
 	@Autowired
 	public SessionFactory sessionFactory;
 	
@@ -43,6 +47,18 @@ public class OrderItemDaoImplement implements OrderItemDao {
 		// TODO Auto-generated method stub
 		OrderItem item = (OrderItem) getSession().get(OrderItem.class, id);
 		getSession().delete(item);
+	}
+
+	@Override
+	public String getBookTitleOfItem(OrderItem item) {
+		// TODO Auto-generated method stub
+		return item.getBook().getTitle();
+	}
+
+	@Override
+	public double getBookPriceOfItem(OrderItem item) {
+		// TODO Auto-generated method stub
+		return item.getBook().getPrice();
 	}
 
 }

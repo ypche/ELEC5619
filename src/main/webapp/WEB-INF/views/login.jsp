@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Register</title>
+<title>Login</title>
 </head>
 <body>
 <spring:url value="/user/loginUser" var="loginURL"/>
