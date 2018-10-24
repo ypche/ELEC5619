@@ -85,4 +85,28 @@ public class CartController {
 		itemService.addOrderItem(bid, order);
 		return "redirect:/cart/";
 	}
+	
+	@RequestMapping(value="/purchase/{items}", method=RequestMethod.GET)
+	public ModelAndView purchase(@PathVariable("items") String itemsID, HttpSession session) {
+		ModelAndView model = new ModelAndView("purchase");
+		if (session.getAttribute("userID") == null) {
+			model = new ModelAndView("login");
+			User user = new User();
+			model.addObject("userForm", user);
+			return model;
+		}
+		long userID = (Long) session.getAttribute("userID");
+		User currentUser = userService.getUserById(userID);
+		List<OrderItem> items = new ArrayList<OrderItem>();
+		String[] ids = itemsID.split(",");
+		for (String sitemID : ids) {
+			long itemID = Long.parseLong(sitemID);
+			OrderItem item = itemService.getOrderItemByID(itemID);
+			item.setBookTitle(itemService.getBookTitleOfItem(item));
+			item.setBookPrice(itemService.getBookPriceOfItem(item));
+			items.add(item);
+		}
+		model.addObject("ItemsDetail", items);
+		return model;
+	}
 }

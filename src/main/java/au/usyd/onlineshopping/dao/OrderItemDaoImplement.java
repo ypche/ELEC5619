@@ -75,4 +75,11 @@ public class OrderItemDaoImplement implements OrderItemDao {
 		getSession().save(item);
 	}
 
+	@Override
+	public OrderItem getOrderItemByID(long id) {
+		// TODO Auto-generated method stub
+		OrderItem item = (OrderItem) getSession().get(OrderItem.class, id);
+		return item;
+	}
+
 }

@@ -53,4 +53,10 @@ public class OrderItemServiceImpl implements OrderItemService {
 		itemDao.addOrderItem(bookID, order);
 	}
 
+	@Override
+	public OrderItem getOrderItemByID(long id) {
+		// TODO Auto-generated method stub
+		return itemDao.getOrderItemByID(id);
+	}
+
 }
