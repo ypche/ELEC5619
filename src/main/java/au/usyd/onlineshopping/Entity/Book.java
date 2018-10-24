@@ -36,7 +36,7 @@ public class Book implements Serializable{
 	
 	private String image;
 
-	@OneToMany(targetEntity=OrderItem.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToMany(targetEntity=OrderItem.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<OrderItem> orderItems;
 	
 	public String getBookpath() {
