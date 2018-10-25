@@ -11,15 +11,28 @@
 </head>
 <body>
 <table>
-	<tr>
-		<td>user</td>
-		<td>total</td>
-	</tr>
-	
-	<c:forEach items="${list}" var="order">
+	<c:forEach items="${OrderDetail}" var="order">
 		<tr>
-			<td>${order.user}</td>
+			<td>user</td>
+			<td>${order.userName}</td>
+			<td>total: $</td>
 			<td>${order.total}</td>
+		</tr>
+	</c:forEach>
+	
+	<tr>
+		<td>Book Title</td>
+		<td>Book Price</td>
+		<td>Operation</td>
+	</tr>
+	<c:forEach items="${ItemList}" var="orderItem">
+		<tr>
+			<td>${orderItem.bookTitle}</td>
+			<td>${orderItem.bookPrice}</td>
+			<td>
+				<spring:url value="/cart/delete/${orderItem.id}" var="deleteURL"></spring:url>
+				<a href="${deleteURL}">Delete</a>
+			</td>
 		</tr>
 	
 	</c:forEach>

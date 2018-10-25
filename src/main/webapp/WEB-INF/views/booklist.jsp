@@ -8,16 +8,20 @@
 <html>
 <head>
 	<title>Books</title>
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 <spring:url value="/book/addBook" var="addURL"/>
-<a href="${addURL}">add a Book</a>
+<h2 style="font-family: cursive;"><a href="${addURL}">add a Book</a></h1>
 
 <form action="search/${keyword}" method="GET" >
-	<input type="text" method="post" name="keyword" >
-	<button type="submit"  ></button>
+	&nbsp;&nbsp;<input type="text" method="post" name="keyword" >
+	<button type="submit"  >SearchByName</button>
 </form>
-<table>
+<br>
+<table class="table table-bordered">
 	<tr>
 		<td>title</td>
 		<td>author</td>

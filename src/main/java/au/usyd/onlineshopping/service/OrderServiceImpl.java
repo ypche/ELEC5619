@@ -24,15 +24,22 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Order getOrderByUser(User user) {
+	public Order getOrderByUser(long userID) {
 		// TODO Auto-generated method stub
-		return orderDao.getOrderByUser(user);
+		return orderDao.getOrderByUser(userID);
 	}
 
 	@Override
 	public List<Order> getAllOrders() {
 		// TODO Auto-generated method stub
 		return orderDao.getAllOrders();
+	}
+
+	@Override
+	public Order addOrder(User user) {
+		// TODO Auto-generated method stub
+		Order order = orderDao.addOrder(user);
+		return order;
 	}
 
 }

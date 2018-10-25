@@ -104,8 +104,9 @@ public class BookController {
 			imgFile.transferTo(newFile);
 			bookService.addBook(book,newFileName);
 			
+			
 		}
-		return "redirect:/book/getAllBooks";
+        return "redirect:/book/getBooks";
 	}
 	
 	@RequestMapping(value = "/delete/{id}")

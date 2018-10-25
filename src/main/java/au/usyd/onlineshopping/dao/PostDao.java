@@ -1,22 +1,19 @@
 package au.usyd.onlineshopping.dao;
 
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
 import au.usyd.onlineshopping.Entity.Post;
+import au.usyd.onlineshopping.Entity.Topic;
 
-
-@Repository
-public class PostDao extends BaseDao<Post> {
+public interface PostDao {
 	
-	protected final String GET_PAGED_POSTS = "from Post where topic.topicId = ? order by createTime desc";
+	public Post getPostById(long id);
 	
-	protected final String DELETE_TOPIC_POSTS = "delete from Post where topic.topicId=?";
+	public Post getPostContent(String content);
 	
-	public Page getPagedPosts(int topicId, int pageNo, int pageSize) {
-		return pagedQuery(GET_PAGED_POSTS, pageNo, pageSize, topicId);
-	}
+	public void addPost(Post post, String newPostContent);
 	
-	public void deleteTopicPosts(int topicId) {
-		getHibernateTemplate().bulkUpdate(DELETE_TOPIC_POSTS, topicId);
-	}
+	public void deletePost(long id);
+	
+	public List<Post> getPostByTopic(Topic topic);
 }

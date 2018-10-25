@@ -1,28 +1,20 @@
 package au.usyd.onlineshopping.dao;
 
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
 import au.usyd.onlineshopping.Entity.Topic;
 
-@Repository
-public class TopicDao extends BaseDao<Topic>{
+public interface TopicDao {
 	
-	private final String GET_BOARD_DIGEST_TOPICS = "from Topic t where t.boardId = ? and digest > 0 order by t.lastPost desc, digest desc";
+	public Topic getTopicById(long id);
 	
-	private final String GET_PAGED_TOPICS = "from Topic where boardId = ? order by lastPost desc";
+	public Topic getTopicByTitle(String title);
 	
-	private final String QUERY_TOPIC_BY_TITILE = "from Topic where topicTitle like ? order by lastPost desc";
+	public void addTopic(Topic topic, String newTopicTitle);
 	
-	public Page getBoardDigestTopics(int boardId, int pageNo, int pageSize) {
-		return pagedQuery(GET_BOARD_DIGEST_TOPICS, pageNo, pageSize, boardId);
-		
-	}
+	public void deleteTopic(long id);
 	
-	public Page getPagedTopics (int boardId, int pageNo, int pageSize) {
-		return pagedQuery (GET_PAGED_TOPICS, pageNo, pageSize, boardId);
-	}
+	public List<Topic> getTopicsByKeyWord(String KeyWord);
 	
-	public Page queryTopicByTitle(String title, int pageNo, int pageSize) {
-		return pagedQuery(QUERY_TOPIC_BY_TITILE, pageNo, pageSize, title);
-	}
+	public List<Topic> getTopics();
 }
