@@ -18,9 +18,9 @@ public class OrderItemServiceImpl implements OrderItemService {
 	OrderItemDao itemDao;
 
 	@Override
-	public List<OrderItem> getOrderItemsByOrder(Order order) {
+	public List<OrderItem> getInCartOrderItemsByOrder(Order order) {
 		// TODO Auto-generated method stub
-		return itemDao.getOrderItemsByOrder(order);
+		return itemDao.getInCartOrderItemsByOrder(order);
 	}
 
 	@Override

@@ -7,7 +7,7 @@ import au.usyd.onlineshopping.Entity.OrderItem;
 
 public interface OrderItemDao {
 
-	public List<OrderItem> getOrderItemsByOrder(Order order);
+	public List<OrderItem> getInCartOrderItemsByOrder(Order order);
 	public OrderItem getOrderItemByID(long id);
 	public String getBookTitleOfItem(OrderItem item);
 	public double getBookPriceOfItem(OrderItem item);

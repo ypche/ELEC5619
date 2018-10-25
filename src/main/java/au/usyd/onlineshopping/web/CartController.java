@@ -58,7 +58,7 @@ public class CartController {
 		orderList.add(order);
 		model.addObject("OrderDetail", orderList);
 		
-		List<OrderItem> itemList = itemService.getOrderItemsByOrder(order);
+		List<OrderItem> itemList = itemService.getInCartOrderItemsByOrder(order);
 		for (OrderItem item : itemList) {
 			item.setBookTitle(itemService.getBookTitleOfItem(item));
 			item.setBookPrice(itemService.getBookPriceOfItem(item));

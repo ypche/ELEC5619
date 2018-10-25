@@ -31,10 +31,11 @@ public class OrderItemDaoImplement implements OrderItemDao {
 	}
 	
 	@Override
-	public List<OrderItem> getOrderItemsByOrder(Order order) {
+	public List<OrderItem> getInCartOrderItemsByOrder(Order order) {
 		// TODO Auto-generated method stub
 		Criteria criteria = getSession().createCriteria(OrderItem.class);
 		criteria.add(Restrictions.eq("order", order));
+		criteria.add(Restrictions.eq("status", "InCart"));
 		List<OrderItem> items = criteria.list();
 		return items;
 		/*return null;*/
