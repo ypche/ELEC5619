@@ -72,6 +72,7 @@ public class OrderItemDaoImplement implements OrderItemDao {
 		OrderItem item = new OrderItem();
 		item.setBook(book);
 		item.setOrder(order);
+		item.setStatus("InCart");
 		getSession().save(item);
 	}
 
@@ -80,6 +81,18 @@ public class OrderItemDaoImplement implements OrderItemDao {
 		// TODO Auto-generated method stub
 		OrderItem item = (OrderItem) getSession().get(OrderItem.class, id);
 		return item;
+	}
+
+	@Override
+	public void buyOrderItems(List<OrderItem> items) {
+		// TODO Auto-generated method stub
+		if (items.size() == 0)
+			return;
+		
+		for (OrderItem item : items) {
+			item.setStatus("Bought");
+			getSession().merge(item);
+		}
 	}
 
 }

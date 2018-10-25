@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name="OrderItems")
 public class OrderItem implements Serializable {
@@ -31,6 +33,10 @@ public class OrderItem implements Serializable {
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="book_id")
 	private Book book;
+	
+	@Column
+	@NotEmpty
+	private String status;
 	
 	@Transient
 	private String bookTitle;
@@ -63,6 +69,14 @@ public class OrderItem implements Serializable {
 
 	public void setBook(Book book) {
 		this.book = book;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public String getBookTitle() {

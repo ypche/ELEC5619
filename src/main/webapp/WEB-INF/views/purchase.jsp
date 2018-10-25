@@ -26,6 +26,18 @@
 
     <!-- Custom styles for this template -->
     <link href="<%=basePath %>css/album.css" type="text/css" rel="stylesheet">
+    
+    <script type="text/javascript">
+    	function confirmPurchase() {
+    		var url = window.location.href;
+    		var urls = url.split('/');
+    		var str = "";
+    		if (urls.length > 1) {
+    			str = urls[urls.length - 1];
+    		}
+    		window.location.href = "/onlineshopping/cart/confirm/" + str;
+    	}
+    </script>
   </head>
 
   <body>
@@ -53,7 +65,7 @@
 				<a href="/onlineshopping/cart/"><button type="button" class="btn btn-secondary">Back to Cart</button></a>
 			</div>
 			<div class="col">
-				<button type="button" class="btn btn-primary">Confirm and Purchase</button>
+				<button type="button" class="btn btn-primary" onClick="confirmPurchase()">Confirm and Purchase</button>
 			</div>
 		</div>
 	</form>
