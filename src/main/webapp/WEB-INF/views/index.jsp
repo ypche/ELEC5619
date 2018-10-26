@@ -109,7 +109,11 @@
 	                  <div class="d-flex justify-content-between align-items-center">
 	                    <div class="btn-group">
 	                      <button type="button" class="btn btn-sm btn-outline-secondary">To Wishlist</button>
+<<<<<<< HEAD
 	                      <button type="button" class="btn btn-sm btn-outline-secondary">Add Cart</button>
+=======
+	                      <a href="/onlineshopping/cart/addItem/${book.id}"><button type="button" class="btn btn-sm btn-outline-secondary">Add Cart</button></a>
+>>>>>>> master
 	                    </div>
 	                    <small class="text-muted">Price: $${book.price}</small>
 	                  </div>
