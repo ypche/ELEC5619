@@ -2,6 +2,7 @@ package au.usyd.onlineshopping.Entity;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -42,8 +43,8 @@ public class User implements Serializable {
 	@OneToMany(targetEntity=Order.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<Order> orders;
 	
-	@OneToMany(targetEntity=Delivery.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	private List<Delivery> deliveries;
+	@OneToMany(targetEntity=Delivery.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	private Set<Delivery> deliveries;
 	
 	public long getId() {
 		return id;
@@ -93,11 +94,11 @@ public class User implements Serializable {
 		this.orders = orders;
 	}
 
-	public List<Delivery> getDeliveries() {
+	public Set<Delivery> getDeliveries() {
 		return deliveries;
 	}
 
-	public void setDeliveries(List<Delivery> deliveries) {
+	public void setDeliveries(Set<Delivery> deliveries) {
 		this.deliveries = deliveries;
 	}
 }

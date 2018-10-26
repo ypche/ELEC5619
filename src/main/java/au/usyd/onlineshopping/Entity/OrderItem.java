@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -44,8 +45,8 @@ public class OrderItem implements Serializable {
 	@Transient
 	private double bookPrice;
 	
-	@OneToMany(targetEntity=Delivery.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	private List<Delivery> deliveries;
+	@OneToOne(targetEntity=Delivery.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private Delivery delivery;
 
 	public long getId() {
 		return id;
@@ -95,11 +96,19 @@ public class OrderItem implements Serializable {
 		this.bookPrice = bookPrice;
 	}
 
-	public List<Delivery> getDeliveries() {
-		return deliveries;
+	public Delivery getDelivery() {
+		return delivery;
 	}
 
-	public void setDeliveries(List<Delivery> deliveries) {
-		this.deliveries = deliveries;
+	public void setDelivery(Delivery delivery) {
+		this.delivery = delivery;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
 	}
 }

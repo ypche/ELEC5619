@@ -2,6 +2,7 @@ package au.usyd.onlineshopping.Entity;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -37,10 +38,10 @@ public class Book implements Serializable{
 	private String image;
 
 	@OneToMany(targetEntity=OrderItem.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	private List<OrderItem> orderItems;
+	private Set<OrderItem> orderItems;
 	
-	@OneToMany(targetEntity=Delivery.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	private List<Delivery> deliveries;
+	@OneToMany(targetEntity=Delivery.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	private Set<Delivery> deliveries;
 	
 	public String getBookpath() {
 		return bookpath;
@@ -123,19 +124,19 @@ public class Book implements Serializable{
 		this.image = image;
 	}
 	
-	public List<OrderItem> getOrderItems() {
+	public Set<OrderItem> getOrderItems() {
 		return orderItems;
 	}
 
-	public void setOrderItems(List<OrderItem> orderItems) {
+	public void setOrderItems(Set<OrderItem> orderItems) {
 		this.orderItems = orderItems;
 	}
 
-	public List<Delivery> getDeliveries() {
+	public Set<Delivery> getDeliveries() {
 		return deliveries;
 	}
 
-	public void setDeliveries(List<Delivery> deliveries) {
+	public void setDeliveries(Set<Delivery> deliveries) {
 		this.deliveries = deliveries;
 	}
 
