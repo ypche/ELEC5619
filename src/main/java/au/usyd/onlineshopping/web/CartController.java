@@ -38,7 +38,7 @@ public class CartController {
 	@Autowired
 	public DeliveryService deliveryService;
 	
-	@RequestMapping(value="/", method=RequestMethod.GET)
+	@RequestMapping(value="", method=RequestMethod.GET)
 	public ModelAndView cart(HttpSession session) {
 		ModelAndView model = new ModelAndView("cart");
 		if (session.getAttribute("userID") == null) {
@@ -70,7 +70,7 @@ public class CartController {
 	@RequestMapping(value="/delete/{id}")
 	public String deleteOrderItem(@PathVariable("id") long id) {
 		itemService.deleteOrderItem(id);
-		return "redirect:/cart/";
+		return "redirect:/cart";
 	}
 	
 	@RequestMapping(value="/addItem/{bid}")
@@ -86,7 +86,7 @@ public class CartController {
 		}
 		order.setUserName(currentUser.getName());
 		itemService.addOrderItem(bid, order);
-		return "redirect:/cart/";
+		return "redirect:/cart";
 	}
 	
 	@RequestMapping(value="/purchase/{items}", method=RequestMethod.GET)
@@ -131,6 +131,6 @@ public class CartController {
 		}
 		deliveryService.addDeliveriesFromOrderItems(items, currentUser);
 		itemService.buyOrderItems(items);
-		return "redirect:/cart/";
+		return "redirect:/cart";
 	}
 }

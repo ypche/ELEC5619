@@ -21,7 +21,7 @@
 			if (str == "") {
 				return;
 			}
-			window.location.href = "purchase/" + str;
+			window.location.href = "cart/purchase/" + str;
 		}
 		
 		function checkAllItems() {

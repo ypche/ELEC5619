@@ -9,6 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -54,5 +55,11 @@ public class DeliveryController {
 		}
 		model.addObject("ItemList", deliveries);
 		return model;
+	}
+	
+	@RequestMapping(value="sendCode/{deliveriesID}")
+	public String generatePurchaseCode(@PathVariable("deliveriesID") String deliveriesID, HttpSession session) {
+		
+		return "redirect:/delivery";
 	}
 }

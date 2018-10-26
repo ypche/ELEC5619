@@ -21,7 +21,7 @@
 			if (str == "") {
 				return;
 			}
-			window.location.href = "sendCode/" + str;
+			window.location.href = "delivery/sendCode/" + str;
 		}
 		
 		function checkAllItems() {
