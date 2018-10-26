@@ -15,4 +15,5 @@ public interface OrderItemService {
 	public void addOrderItem(long bookID, Order order);
 	public OrderItem getOrderItemByID(long id);
 	public void buyOrderItems(List<OrderItem> items);
+	public void deliveryOrderItem(OrderItem item);
 }

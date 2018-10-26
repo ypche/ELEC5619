@@ -96,4 +96,11 @@ public class OrderItemDaoImplement implements OrderItemDao {
 		}
 	}
 
+	@Override
+	public void deliveryOrderItem(OrderItem item) {
+		// TODO Auto-generated method stub
+		item.setStatus("Delivered");
+		getSession().merge(item);
+	}
+
 }

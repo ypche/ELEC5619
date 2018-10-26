@@ -15,4 +15,5 @@ public interface OrderItemDao {
 	public void deleteOrderItem(long id);
 	public void addOrderItem(long bookID, Order order);
 	public void buyOrderItems(List<OrderItem> items);
+	public void deliveryOrderItem(OrderItem item);
 }

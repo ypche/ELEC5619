@@ -36,4 +36,16 @@ public class DeliveryServiceImpl implements DeliveryService {
 		deliveryDao.addDeliveriesFromOrderItems(items, user);
 	}
 
+	@Override
+	public void generatePurchaseCode(long id) {
+		// TODO Auto-generated method stub
+		deliveryDao.generatePurchaseCode(id);
+	}
+
+	@Override
+	public List<Delivery> getAllDeliveriesWithBoughtItems() {
+		// TODO Auto-generated method stub
+		return deliveryDao.getAllDeliveriesWithBoughtItems();
+	}
+
 }

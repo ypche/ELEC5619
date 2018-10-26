@@ -1,5 +1,6 @@
 package au.usyd.onlineshopping.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -48,18 +49,19 @@ public class DeliveryController {
 			return new ModelAndView("redirect:/book/getBooks");
 		}
 		
-		List<Delivery> deliveries = deliveryService.getAllDeliveries();
-		for (Delivery delivery : deliveries) {
-			delivery.setBookTitle(delivery.getBook().getTitle());
-			delivery.setBookBuyer(delivery.getUser().getName());
-		}
+		List<Delivery> deliveries = deliveryService.getAllDeliveriesWithBoughtItems();
 		model.addObject("ItemList", deliveries);
 		return model;
 	}
 	
-	@RequestMapping(value="sendCode/{deliveriesID}")
+	@RequestMapping(value="/sendCode/{deliveriesID}")
 	public String generatePurchaseCode(@PathVariable("deliveriesID") String deliveriesID, HttpSession session) {
-		
+		String[] dIDList = deliveriesID.split(",");
+		for (String deliveryID : dIDList) {
+			deliveryService.generatePurchaseCode(Long.parseLong(deliveryID));
+			Delivery delivery = deliveryService.getDeliveryById(Long.parseLong(deliveryID));
+			itemService.deliveryOrderItem(delivery.getItem());
+		}
 		return "redirect:/delivery";
 	}
 }

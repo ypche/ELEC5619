@@ -65,4 +65,10 @@ public class OrderItemServiceImpl implements OrderItemService {
 		itemDao.buyOrderItems(items);
 	}
 
+	@Override
+	public void deliveryOrderItem(OrderItem item) {
+		// TODO Auto-generated method stub
+		itemDao.deliveryOrderItem(item);
+	}
+
 }

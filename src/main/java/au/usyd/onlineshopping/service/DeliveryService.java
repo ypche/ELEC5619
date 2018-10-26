@@ -11,4 +11,6 @@ public interface DeliveryService {
 	public List<Delivery> getAllDeliveries();
 	public Delivery getDeliveryById(long id);
 	public void addDeliveriesFromOrderItems(List<OrderItem> items, User user);
+	public void generatePurchaseCode(long id);
+	public List<Delivery> getAllDeliveriesWithBoughtItems();
 }

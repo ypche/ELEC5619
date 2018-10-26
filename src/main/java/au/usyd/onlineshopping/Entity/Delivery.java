@@ -35,7 +35,7 @@ public class Delivery implements Serializable {
 	@JoinColumn(name="book_id")
 	private Book book;
 	
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="item_id")
 	private OrderItem item;
 	

@@ -45,7 +45,7 @@ public class OrderItem implements Serializable {
 	@Transient
 	private double bookPrice;
 	
-	@OneToOne(targetEntity=Delivery.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToOne(targetEntity=Delivery.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private Delivery delivery;
 
 	public long getId() {
