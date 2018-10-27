@@ -1,7 +1,7 @@
 package au.usyd.onlineshopping.dao;
 
 import au.usyd.onlineshopping.Entity.User;
-// UserDao
+// UserDao add user
 public interface UserDao {
 
 	public User getUserById(long id);
