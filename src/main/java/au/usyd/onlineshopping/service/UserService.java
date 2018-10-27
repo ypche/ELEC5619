@@ -2,6 +2,7 @@ package au.usyd.onlineshopping.service;
 
 import au.usyd.onlineshopping.Entity.User;
 
+// UserServuce
 public interface UserService {
 
 	public User getUserById(long id);
