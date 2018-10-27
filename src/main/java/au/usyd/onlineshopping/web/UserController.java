@@ -14,6 +14,8 @@ import au.usyd.onlineshopping.service.UserService;
 
 @Controller
 @RequestMapping("/user")
+
+// UserController
 public class UserController {
 
 	@Autowired
