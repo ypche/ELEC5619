@@ -17,6 +17,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="Users")
+
+// User
 public class User implements Serializable {
 
 	@Id
