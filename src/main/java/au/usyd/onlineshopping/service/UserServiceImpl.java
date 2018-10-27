@@ -9,6 +9,8 @@ import au.usyd.onlineshopping.dao.UserDao;
 
 @Service
 @Transactional
+
+//User Service Implements
 public class UserServiceImpl implements UserService {
 
 	@Autowired
