@@ -2,8 +2,8 @@ package au.usyd.onlineshopping.dao;
 
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+//import org.apache.commons.logging.Log;
+//import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,7 +18,7 @@ import au.usyd.onlineshopping.Entity.OrderItem;
 @Repository
 public class OrderItemDaoImplement implements OrderItemDao {
 
-	protected final Log logger = LogFactory.getLog(getClass());
+	//protected final Log logger = LogFactory.getLog(getClass());
 	
 	@Autowired
 	public SessionFactory sessionFactory;
