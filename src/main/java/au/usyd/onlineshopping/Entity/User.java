@@ -42,6 +42,9 @@ public class User implements Serializable {
 	@OneToMany(targetEntity=Order.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<Order> orders;
 	
+	@OneToMany(targetEntity=Wishlist.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	private List<Wishlist> wishlists;
+	
 	public long getId() {
 		return id;
 	}
@@ -88,5 +91,13 @@ public class User implements Serializable {
 
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
+	}
+
+	public List<Wishlist> getWishlists() {
+		return wishlists;
+	}
+
+	public void setWishlists(List<Wishlist> wishlists) {
+		this.wishlists = wishlists;
 	}
 }

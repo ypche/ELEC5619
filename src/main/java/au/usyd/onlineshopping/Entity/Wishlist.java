@@ -19,11 +19,11 @@ public class Wishlist implements Serializable {
 	@Column(name = "Id")
 	private long id;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="user_id")
 	private User userId;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="book_id")
 	private Book bookId;
 	
