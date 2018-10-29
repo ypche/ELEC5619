@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.xml.stream.events.Comment;
+
 
 
 @Entity
@@ -41,8 +41,8 @@ public class Post implements Serializable {
 	@Transient
 	private String userName;
 	
-	@OneToMany(targetEntity=Comment.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	private List<Comment> comments;
+	@OneToMany(targetEntity=CommentPost.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<CommentPost> comments;
 	
 	public String getContent() {
 		return content;
@@ -77,11 +77,11 @@ public class Post implements Serializable {
 		this.userID = userID;
 	}
 	
-	public List<Comment> getComments(){
+	public List<CommentPost> getComments(){
 		return comments;
 	}
 	
-	public void setComments(List<Comment> comments) {
+	public void setComments(List<CommentPost> comments) {
 		this.comments = comments;
 	}
 	
