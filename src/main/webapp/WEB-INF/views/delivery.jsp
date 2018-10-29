@@ -7,9 +7,9 @@
 
 <html>
 <head>
-	<title>Shopping Cart</title>
+	<title>Shopping Delivery</title>
 	<script type="text/javascript">
-		function buyCheckedItems() {
+		function deliveryCheckedItems() {
 			var cks = document.getElementsByName("checkIds");
 			var str = "";
 			for (var i = 0; i < cks.length; i++) {
@@ -21,7 +21,7 @@
 			if (str == "") {
 				return;
 			}
-			window.location.href = "cart/purchase/" + str;
+			window.location.href = "delivery/sendCode/" + str;
 		}
 		
 		function checkAllItems() {
@@ -38,29 +38,20 @@
 </head>
 <body>
 <table>
-	<c:forEach items="${OrderDetail}" var="order">
-		<tr>
-			<td>user</td>
-			<td>${order.userName}</td>
-			<td>total: $</td>
-			<td>${order.total}</td>
-		</tr>
-	</c:forEach>
-	
 	<tr>
 		<td><input type="checkbox" name="checkAll" onClick="checkAllItems()"></td>
 		<td>Book Title</td>
-		<td>Book Price</td>
+		<td>Buyer</td>
 		<td>Operation</td>
 	</tr>
-	<c:forEach items="${ItemList}" var="orderItem">
+	<c:forEach items="${ItemList}" var="deliveryItem">
 		<tr>
-			<td><input type="checkbox" id="checkIds" name="checkIds" value="${orderItem.id}"></td>
-			<td>${orderItem.bookTitle}</td>
-			<td>${orderItem.bookPrice}</td>
+			<td><input type="checkbox" id="checkIds" name="checkIds" value="${deliveryItem.id}"></td>
+			<td>${deliveryItem.bookTitle}</td>
+			<td>${deliveryItem.bookBuyer}</td>
 			<td>
-				<spring:url value="/cart/delete/${orderItem.id}" var="deleteURL"></spring:url>
-				<a href="${deleteURL}">Delete</a>
+				<spring:url value="/delivery/sendCode/${deliveryItem.id}" var="sendURL"></spring:url>
+				<a href="${sendURL}">Delivery</a>
 			</td>
 		</tr>
 	
@@ -69,7 +60,7 @@
 		<td></td>
 		<td></td>
 		<td></td>
-		<td><input type="submit" onClick="buyCheckedItems()" value="Buy Now"></td>
+		<td><input type="submit" onClick="deliveryCheckedItems()" value="Delivery Items"></td>
 	</tr>
 </table>	
 </body>

@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -30,10 +31,19 @@ public class OrderDaoImplement implements OrderDao {
 	}
 
 	@Override
-	public Order getOrderByUser(long userID) {
+	public Order getOrderByUser(User user) {
 		// TODO Auto-generated method stub
-		Order order = (Order) getSession().get(Order.class, userID);
-		return order;
+		Criteria criteria = getSession().createCriteria(Order.class);
+		criteria.add(Restrictions.eq("status", "active"));
+		criteria.add(Restrictions.eq("userID", user));
+//		Order order = (Order) getSession().get(Order.class, userID);
+		List<Order> list = criteria.list();
+		if (list.size() > 0) {		
+			Order order = list.get(0);
+			return order;
+		}
+		else
+			return null;
 	}
 
 	@Override

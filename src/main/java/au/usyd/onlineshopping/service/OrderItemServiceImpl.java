@@ -18,9 +18,9 @@ public class OrderItemServiceImpl implements OrderItemService {
 	OrderItemDao itemDao;
 
 	@Override
-	public List<OrderItem> getOrderItemsByOrder(Order order) {
+	public List<OrderItem> getInCartOrderItemsByOrder(Order order) {
 		// TODO Auto-generated method stub
-		return itemDao.getOrderItemsByOrder(order);
+		return itemDao.getInCartOrderItemsByOrder(order);
 	}
 
 	@Override
@@ -45,6 +45,30 @@ public class OrderItemServiceImpl implements OrderItemService {
 	public double getBookPriceOfItem(OrderItem item) {
 		// TODO Auto-generated method stub
 		return itemDao.getBookPriceOfItem(item);
+	}
+
+	@Override
+	public void addOrderItem(long bookID, Order order) {
+		// TODO Auto-generated method stub
+		itemDao.addOrderItem(bookID, order);
+	}
+
+	@Override
+	public OrderItem getOrderItemByID(long id) {
+		// TODO Auto-generated method stub
+		return itemDao.getOrderItemByID(id);
+	}
+
+	@Override
+	public void buyOrderItems(List<OrderItem> items) {
+		// TODO Auto-generated method stub
+		itemDao.buyOrderItems(items);
+	}
+
+	@Override
+	public void deliveryOrderItem(OrderItem item) {
+		// TODO Auto-generated method stub
+		itemDao.deliveryOrderItem(item);
 	}
 
 }
