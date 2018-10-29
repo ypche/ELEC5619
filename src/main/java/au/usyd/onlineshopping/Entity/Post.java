@@ -1,7 +1,10 @@
 package au.usyd.onlineshopping.Entity;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,11 +12,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.xml.stream.events.Comment;
 
 
 @Entity
-@Table(name="Post")
+@Table(name="Posts")
 public class Post implements Serializable {
 	
 	@Id
@@ -23,14 +29,20 @@ public class Post implements Serializable {
 	
 	private String content;
 	
+	//private String title;
+	
+	@Column(name="time")
+	private Date postTime;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="Topic_id")
-	private Topic topic;
+	@JoinColumn(name="user_id")
+	private User userID;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "user_id")
-	private User user;
+	@Transient
+	private String userName;
+	
+	@OneToMany(targetEntity=Comment.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<Comment> comments;
 	
 	public String getContent() {
 		return content;
@@ -48,19 +60,36 @@ public class Post implements Serializable {
 		this.id = id;
 	}
 	
-	public Topic getTopic() {
-		return topic;
+	
+	public Date getPostTime() {
+		return postTime;
 	}
 	
-	public void setTopic(Topic topic) {
-		this.topic = topic;
+	public void setPostTime(Date postTime)	{
+		this.postTime = postTime;
 	}
 	
-	public User getUser() {
-		return user;
+	public User getUserID() {
+		return userID;
 	}
 	
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserID(User userID) {
+		this.userID = userID;
+	}
+	
+	public List<Comment> getComments(){
+		return comments;
+	}
+	
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+	
+	public String getUserName() {
+		return userName;
+	}
+	
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 }

@@ -1,5 +1,6 @@
 package au.usyd.onlineshopping.dao;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -10,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import au.usyd.onlineshopping.Entity.Post;
-import au.usyd.onlineshopping.Entity.Topic;
+import au.usyd.onlineshopping.Entity.User;
+
+
 
 @Repository
 public class PostDaoImplement implements PostDao {
@@ -25,37 +28,44 @@ public class PostDaoImplement implements PostDao {
 	}
 	
 	@Override
-	public List<Post> getPostByTopic (Topic topic) {
+	public Post getPostById (long id) {
 		
-		Criteria criteria = getSession().createCriteria(Post.class);
-		
-		criteria.add(Restrictions.eq("topic", topic));
-		List<Post> posts = criteria.list()	;
-		return posts;
-	}
-	
-	@Override
-	public Post getPostContent(String content) {
-		Post post = (Post) getSession().get(Post.class, content);
+		Post post = (Post) getSession().get(Post.class, id);
 		return post;
 	}
 	
 	@Override
-	public void addPost(Post post, String newPostContent) {
-		post.setContent(newPostContent);
-		getSession().save(post);
+	public Post getPostByUser(User user) {
+		
+		Criteria criteria = getSession().createCriteria(Post.class);
+		
+		criteria.add(Restrictions.eq("userId", user));
+		
+		List<Post> list = criteria.list();
+		if (list.size() > 0) {
+			Post post = list.get(0);
+			return post;
+		}
+		else 
+			return null;
 	}
 	
 	@Override
-	public void deletePost(long id) {
-		Post post = (Post) getSession().get(Post.class, id);
-		getSession().delete(post);
+	public List<Post> getAllPosts() {
+		
+		Criteria criteria = getSession().createCriteria(Post.class);
+		
+		return (List<Post>)criteria.list();
 	}
-
+	
 	@Override
-	public Post getPostById(long id) {
-		// TODO Auto-generated method stub
-		Post post = (Post) getSession().get(Post.class, id);
+	public Post addPost(User user, String newContent) {
+		Post post = new Post();
+		post.setPostTime(Calendar.getInstance().getTime());
+		post.setContent(newContent);
+		post.setUserID(user);
+		post.setUserName(user.getName());
+		getSession().save(post);
 		return post;
 	}
 	
