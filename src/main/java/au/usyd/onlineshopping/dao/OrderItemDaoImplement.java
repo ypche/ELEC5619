@@ -103,4 +103,10 @@ public class OrderItemDaoImplement implements OrderItemDao {
 		getSession().merge(item);
 	}
 
+	@Override
+	public String getBookDescriptionOfItem(OrderItem item) {
+		// TODO Auto-generated method stub
+		return item.getBook().getDescription();
+	}
+
 }

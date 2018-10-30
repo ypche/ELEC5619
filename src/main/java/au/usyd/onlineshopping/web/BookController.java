@@ -24,8 +24,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import au.usyd.onlineshopping.Entity.Book;
 import au.usyd.onlineshopping.Entity.PageBean;
+import au.usyd.onlineshopping.Entity.User;
 import au.usyd.onlineshopping.service.BookService;
 import au.usyd.onlineshopping.service.PageBeanService;
+import au.usyd.onlineshopping.service.UserService;
 
 
 @Controller
@@ -36,6 +38,8 @@ public class BookController {
 	public BookService bookService;	
 	@Autowired
 	public PageBeanService pageBeanService;	
+	@Autowired
+	public UserService userService;
 	
 //	@RequestMapping(value = "/getBooks", method = RequestMethod.GET)
 //	public ModelAndView list() {
@@ -46,7 +50,7 @@ public class BookController {
 //	}
 	
 	@RequestMapping(value = "/getBooks", method = RequestMethod.GET)
-	public ModelAndView list(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView list(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		String pageNum = request.getParameter("pageNum");
 		if(pageNum == null) {
 			pageNum = "1";
@@ -54,6 +58,12 @@ public class BookController {
 		PageBean<Book> pb = pageBeanService.getBookWithPage(Integer.parseInt(pageNum));	
 		ModelAndView model = new ModelAndView("index");
 		model.addObject("pageBean",pb);
+		
+		if (session.getAttribute("userID") != null) {
+			long userID = (Long) session.getAttribute("userID");
+			User currentUser = userService.getUserById(userID);
+			model.addObject("username", currentUser.getName());
+		}
 		return model;
 	}
 

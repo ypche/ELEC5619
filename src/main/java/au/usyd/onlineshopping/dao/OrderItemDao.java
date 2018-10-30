@@ -11,6 +11,7 @@ public interface OrderItemDao {
 	public OrderItem getOrderItemByID(long id);
 	public String getBookTitleOfItem(OrderItem item);
 	public double getBookPriceOfItem(OrderItem item);
+	public String getBookDescriptionOfItem(OrderItem item);
 	public void addOrderItem(OrderItem orderItem);
 	public void deleteOrderItem(long id);
 	public void addOrderItem(long bookID, Order order);

@@ -71,4 +71,10 @@ public class OrderItemServiceImpl implements OrderItemService {
 		itemDao.deliveryOrderItem(item);
 	}
 
+	@Override
+	public String getBookDescriptionOfItem(OrderItem item) {
+		// TODO Auto-generated method stub
+		return itemDao.getBookDescriptionOfItem(item);
+	}
+
 }

@@ -19,7 +19,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Album example for Bootstrap</title>
+    <title>Books</title>
 
     <!-- Bootstrap core CSS -->
     <link href="<%=basePath %>css/bootstrap.min.css" rel="stylesheet">
@@ -31,35 +31,41 @@
   <body>
 
     <header>
-      <div class="collapse bg-dark" id="navbarHeader">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-8 col-md-7 py-4">
-              <h4 class="text-white">About</h4>
-              <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
-            </div>
-            <div class="col-sm-4 offset-md-1 py-4">
-              <h4 class="text-white">Contact</h4>
-              <ul class="list-unstyled">
-                <li><a href="#" class="text-white">Follow on Twitter</a></li>
-                <li><a href="#" class="text-white">Like on Facebook</a></li>
-                <li><a href="#" class="text-white">Email me</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  	<div class="container">
+      <a href="<%=basePath %>book/getBooks" class="navbar-brand d-flex align-items-center">
+        <img width="20" height="20" alt="" src="https://doc-00-88-docs.googleusercontent.com/docs/securesc/1lhra9ur6rbc8etdjasmei79ag64jeuu/725dvpemcaa8gcnqjp5f9elovo0tunp2/1540900800000/01552601290929276177/01552601290929276177/1xsv1SLUU0uBRiop9xazGwArXswPAl3XW?e=download&nonce=f1ju7vdo00m3m&user=01552601290929276177&hash=omdjkaps6nrjuinda3nnlllp0o6huvj2">
+        <strong>&nbspHappyReader</strong>
+      </a>
+      <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="<%=basePath%>">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="<%=basePath%>cart">Cart</a>
+          </li>
+          
+        </ul>
+        <c:choose>
+        	<c:when test="${sessionScope.userID eq null}">
+        		<div class="span12">
+					<a class="btn btn-outline-info" href="<%=basePath%>user/register" role="button">Signup</a>&nbsp
+					<a class="btn btn-outline-success" href="<%=basePath%>user/login" role="button">Signin</a>
+				</div>
+        	</c:when>
+        	<c:otherwise>
+        		<a class="btn btn-dark" href="" role="button">${username}</a>&nbsp
+        		<a class="btn btn-secondary" href="<%=basePath %>user/logout" role="button">Logout</a>
+        	</c:otherwise>
+        </c:choose>
       </div>
-      <div class="navbar navbar-dark bg-dark box-shadow">
-        <div class="container d-flex justify-content-between">
-          <a href="#" class="navbar-brand d-flex align-items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-            <strong>HappyReader</strong>
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        </div>
       </div>
+    </nav>
     </header>
 
     <main role="main">
@@ -95,7 +101,7 @@
 	            <div class="col-md-4">
 	              <div class="card mb-4 box-shadow">
               		<c:if test="${book.image!=null}">
-						<img class="card-img-top" alt="" src="/image/${book.image}" width="200" height="300">
+						<img class="card-img-top" alt="" src="${book.image}" height="500">
 					</c:if>
 	<!--                 <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap"> -->
 	                <div class="card-body">

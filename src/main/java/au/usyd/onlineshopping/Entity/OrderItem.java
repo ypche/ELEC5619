@@ -45,6 +45,9 @@ public class OrderItem implements Serializable {
 	@Transient
 	private double bookPrice;
 	
+	@Transient
+	private String bookDescription;
+	
 	@OneToOne(targetEntity=Delivery.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private Delivery delivery;
 
@@ -102,6 +105,14 @@ public class OrderItem implements Serializable {
 
 	public void setDelivery(Delivery delivery) {
 		this.delivery = delivery;
+	}
+
+	public String getBookDescription() {
+		return bookDescription;
+	}
+
+	public void setBookDescription(String bookDescription) {
+		this.bookDescription = bookDescription;
 	}
 
 	@Override
