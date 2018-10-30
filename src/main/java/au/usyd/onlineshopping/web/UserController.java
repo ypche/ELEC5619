@@ -59,4 +59,13 @@ public class UserController {
 		else
 			return "redirect:/user/login";
 	}
+	
+	@RequestMapping(value="/logout")
+	public String logout(HttpSession session) {
+		if (session.getAttribute("userID") != null) {
+			session.invalidate();
+		}
+		
+		return "redirect:/book/getBooks";
+	}
 }

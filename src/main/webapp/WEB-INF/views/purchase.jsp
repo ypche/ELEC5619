@@ -38,43 +38,105 @@
     		window.location.href = "/onlineshopping/cart/confirm/" + str;
     	}
     </script>
+   	<style type="text/css">
+	.bodyFont{
+		font-family: Comic Sans MS
+	}
+	</style>
   </head>
 
   <body>
-  	<form>
+  	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <div class="container">
+      <a href="<%=basePath %>book/getBooks" class="navbar-brand d-flex align-items-center">
+        <img width="20" height="20" alt="" src="https://doc-00-88-docs.googleusercontent.com/docs/securesc/1lhra9ur6rbc8etdjasmei79ag64jeuu/725dvpemcaa8gcnqjp5f9elovo0tunp2/1540900800000/01552601290929276177/01552601290929276177/1xsv1SLUU0uBRiop9xazGwArXswPAl3XW?e=download&nonce=f1ju7vdo00m3m&user=01552601290929276177&hash=omdjkaps6nrjuinda3nnlllp0o6huvj2">
+        <strong>&nbspHappyReader</strong>
+      </a>
+      <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="<%=basePath%>">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="<%=basePath%>cart">Cart</a>
+          </li>
+          
+        </ul>
+        <c:choose>
+        	<c:when test="${sessionScope.userID eq null}">
+        		<div class="span12">
+					<a class="btn btn-outline-info" href="<%=basePath%>user/register" role="button">Signup</a>&nbsp
+					<a class="btn btn-outline-success" href="<%=basePath%>user/login" role="button">Signin</a>
+				</div>
+        	</c:when>
+        	<c:otherwise>
+        		<a class="btn btn-dark" href="" role="button">${username}</a>&nbsp
+        		<a class="btn btn-secondary" href="<%=basePath %>user/logout" role="button">Logout</a>
+        	</c:otherwise>
+        </c:choose>
+      </div>
+      </div>
+    </nav>
+    <br /><br /><br /><br />
+  	<form class="container">
   		<div class="row">
-  			<div class="col">
-  			Book Title
+  			<div class="col-md-2 text-right"></div>
+  			<div class="col-md-8 text-center">
+  				<h1 style="font-family: Baskerville; font-weight: bolder;">
+  				<span><img width="50" height="50" alt="" src="https://doc-00-88-docs.googleusercontent.com/docs/securesc/1lhra9ur6rbc8etdjasmei79ag64jeuu/dl1vv3uefjst0mpom4aus11edar1ugrg/1540893600000/01552601290929276177/01552601290929276177/1MPUZtyD2bEsOxHLVwvcGnU7fXXoEc5eC?e=download"></span>
+  				Purchase List</h1>
   			</div>
-  			<div class="col">
-  			Book Price
-  			</div>
+  			<div class="col-md-2"></div>
   		</div>
   		<c:forEach items="${ItemsDetail}" var="item">
-		  <div class="row">
-		    <div class="col">
-		      ${item.bookTitle}
-		    </div>
-		    <div class="col">
-		      ${item.bookPrice}
-		    </div>
-		  </div>
-		</c:forEach>
-		<div class="row">
-			<div class="col">
+	  		<div class="row">
+	  			<div class="col-md-3"></div>
+	  			<div class="col-md-6">
+	  				<div class="list-group">
+			  			<div class="d-flex w-100 justify-content-between">
+					      <h3 class="mb-1" style="font-family: Copperplate">${item.bookTitle}</h3>
+					      <h3 style="font-family: American Typewriter">$ ${item.bookPrice}</h3>
+					    </div>
+					    <p class="mb-1" style="font-family: Book Antiqua; font-style: italic">${item.bookDescription}</p>
+			  		</div>
+	  			</div>
+	  			<div class="col-md-3"></div>
+	  		</div>
+	  	</c:forEach>
+	  	<div class="row">
+	  		<div class="col-md-2"></div>
+	  		<div class="col-md-8"><hr></div>
+	  		<div class="col-md-2"></div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="col-md-3"></div>
+	  		<div class="col-md-6 text-right">
+	  			<h3 style="font-family: Copperplate">
+	  			<span><img width="30" height="30" alt="" src="https://doc-10-88-docs.googleusercontent.com/docs/securesc/1lhra9ur6rbc8etdjasmei79ag64jeuu/fpdqo350liamr1po25oej8kdchte52gl/1540893600000/01552601290929276177/01552601290929276177/1yOlkqTBt8KBLoHEB3OE6jjq05axfDh6n?e=download"></span>
+	  			Total: <span style="font-family: American Typewriter">$ ${totalPrice}</span></h3>
+	  		</div>
+	  		<div class="col-md-3"></div>
+	  	</div>
+  		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-3">
 				<a href="/onlineshopping/cart/"><button type="button" class="btn btn-secondary">Back to Cart</button></a>
 			</div>
-			<div class="col">
+			<div class="col-md-3 text-right">
 				<button type="button" class="btn btn-primary" onClick="confirmPurchase()">Confirm and Purchase</button>
 			</div>
+			<div class="col-md-3"></div>
 		</div>
 	</form>
 	
 	<br><br><br>
-    <footer class="footerCus">
+    <footer  style="position: fixed; left: 0; bottom: 0;height:50px ; width: 100%; background-color: black; color: white; text-align: center">
       <div class="container">
-        <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-        <p>New to Bootstrap? Visit the homepage or read our getting started guide.</p>
+        <p style="font-family: Comic Sans MS">HappyReader is made by &copy; Bootstrap!</p>
       </div>
     </footer>
 

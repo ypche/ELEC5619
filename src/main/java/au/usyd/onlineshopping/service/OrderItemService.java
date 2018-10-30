@@ -12,6 +12,7 @@ public interface OrderItemService {
 	public void deleteOrderItem(long id);
 	public String getBookTitleOfItem(OrderItem item);
 	public double getBookPriceOfItem(OrderItem item);
+	public String getBookDescriptionOfItem(OrderItem item);
 	public void addOrderItem(long bookID, Order order);
 	public OrderItem getOrderItemByID(long id);
 	public void buyOrderItems(List<OrderItem> items);

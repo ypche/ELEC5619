@@ -1,8 +1,12 @@
 package au.usyd.onlineshopping.web;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
@@ -54,9 +58,8 @@ public class CartController {
 			order = orderService.addOrder(currentUser);
 		}
 		order.setUserName(currentUser.getName());
-		List<Order> orderList = new ArrayList<Order>();
-		orderList.add(order);
-		model.addObject("OrderDetail", orderList);
+		
+		model.addObject("TotalPrice", order.getTotal());
 		
 		List<OrderItem> itemList = itemService.getInCartOrderItemsByOrder(order);
 		for (OrderItem item : itemList) {
@@ -64,6 +67,7 @@ public class CartController {
 			item.setBookPrice(itemService.getBookPriceOfItem(item));
 		}
 		model.addObject("ItemList", itemList);
+		model.addObject("username", currentUser.getName());
 		return model;
 	}
 	
@@ -100,6 +104,7 @@ public class CartController {
 		}
 		long userID = (Long) session.getAttribute("userID");
 		User currentUser = userService.getUserById(userID);
+		double totalPrice = 0;
 		List<OrderItem> items = new ArrayList<OrderItem>();
 		String[] ids = itemsID.split(",");
 		for (String sitemID : ids) {
@@ -107,9 +112,13 @@ public class CartController {
 			OrderItem item = itemService.getOrderItemByID(itemID);
 			item.setBookTitle(itemService.getBookTitleOfItem(item));
 			item.setBookPrice(itemService.getBookPriceOfItem(item));
+			item.setBookDescription(itemService.getBookDescriptionOfItem(item));
 			items.add(item);
+			totalPrice += itemService.getBookPriceOfItem(item);
 		}
 		model.addObject("ItemsDetail", items);
+		model.addObject("username", currentUser.getName());
+		model.addObject("totalPrice", totalPrice);
 		return model;
 	}
 	
@@ -127,6 +136,7 @@ public class CartController {
 			OrderItem item = itemService.getOrderItemByID(itemID);
 			item.setBookTitle(itemService.getBookTitleOfItem(item));
 			item.setBookPrice(itemService.getBookPriceOfItem(item));
+			item.setBookDescription(itemService.getBookDescriptionOfItem(item));
 			items.add(item);
 		}
 		deliveryService.addDeliveriesFromOrderItems(items, currentUser);

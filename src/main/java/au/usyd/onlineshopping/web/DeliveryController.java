@@ -51,6 +51,7 @@ public class DeliveryController {
 		
 		List<Delivery> deliveries = deliveryService.getAllDeliveriesWithBoughtItems();
 		model.addObject("ItemList", deliveries);
+		model.addObject("username", currentUser.getName());
 		return model;
 	}
 	
