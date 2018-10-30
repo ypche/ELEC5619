@@ -126,7 +126,7 @@
         </div>
       </div>
     </header>
- <spring:url value="/post/savePost" var="addURL"/>
+ <spring:url value="/forum/saveComment" var="addURL"/>
  <%-- <a href="${addURL}">save a post</a> --%>
     <main role="main">
       <section class="jumbotron text-center" >

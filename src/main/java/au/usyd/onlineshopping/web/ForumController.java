@@ -187,6 +187,21 @@ public class ForumController {
 		return model;
 	}
 	
+	
+	@RequestMapping(value ="/savePost", method = RequestMethod.POST)
+	public String savePost(HttpServletRequest request, @ModelAttribute Post post, String content, User user) throws Exception, IOException {
+		
+		String postContent = content;
+		postService.addPost(user, postContent);
+		return "redirect:/forum/getPosts";
+	}
+	
+	@RequestMapping(value = "/saveComment", method = RequestMethod.POST)
+	public String saveComment(HttpServletRequest request, @ModelAttribute CommentPost commentPost, String content) throws Exception, IOException{
+		String commentContent = content;
+		commentPostService.addReply(commentPost);
+		return "redirect:/forum/getPosts";
+	}
 	/*//post part
 	@RequestMapping(value = "/getTopics", method = RequestMethod.GET)
 	public ModelAndView list() {
