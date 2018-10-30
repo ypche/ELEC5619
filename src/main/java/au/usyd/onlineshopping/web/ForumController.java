@@ -1,12 +1,16 @@
 package au.usyd.onlineshopping.web;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -36,23 +40,23 @@ public class ForumController {
 	@Autowired
 	public UserService userService;
 	
-	
-	/*@RequestMapping(value = "/managePost", method = RequestMethod.GET)
+	private final Log log = LogFactory.getLog(getClass());
+	@RequestMapping(value = "/managePost", method = RequestMethod.GET)
 	public ModelAndView	managePost() {
 		ModelAndView model = new ModelAndView("postList");
 		List<Post> list = postService.getAllPosts();
 		return model;
-	}*/
+	}
 	 
-	@RequestMapping(value="", method=RequestMethod.GET)
+	@RequestMapping(value="/getPosts", method=RequestMethod.GET)
 	public ModelAndView forum(HttpSession session) {
 		ModelAndView model = new ModelAndView("forum");
-		if(session.getAttribute("userID") == null) {
+		/*if(session.getAttribute("userID") == null) {
 			model = new ModelAndView("login");
 			User user = new User();
 			model.addObject("userForm", user);
 			return model;
-		}
+		}*/
 		long userID = (Long) session.getAttribute("userID");
 		String content = (String) session.getAttribute("newContent");
 		User currentUser = userService.getUserById(userID);
@@ -73,6 +77,57 @@ public class ForumController {
 		return model;
 	}
 	
+	@RequestMapping("/")
+	public ModelAndView toMain(HttpSession session) {
+		ModelAndView indexPage=new ModelAndView("cate");
+		List<Post> posts=postService.listPostsAndUsers();
+		
+		Integer uid=(Integer) session.getAttribute("userID");
+		User user = userService.getUserById(uid);
+		
+		indexPage.addObject("posts", posts);
+		indexPage.addObject("user",user);
+		return indexPage;
+	}
+	
+	//get the detail info
+	/*@RequestMapping("/t/{id}")
+	public ModelAndView toTopic(@PathVariable("id")Integer id,HttpSession session) {
+		Post post= postService.selectById(id);
+		
+		List<CommentPost> commentPost = commentPostService.getCommentsOfPost(id);
+		
+		Integer uid=(Integer) session.getAttribute("userID");
+		User user= userService.getUserById(uid);
+		
+		ModelAndView postPage = new ModelAndView("detail");
+		postPage.addObject("post", post);
+		postPage.addObject("commentPost", commentPost);
+		postPage.addObject("user", user);
+		return postPage;
+	}	*/
+	
+	//post
+	/*@RequestMapping(value = "/post/add", method = RequestMethod.POST)
+	public ModelAndView addPost(HttpServletRequest request,HttpSession session) {
+		ModelAndView indexPage;
+		Integer userId=(Integer) session.getAttribute("userID");
+		String content= request.getParameter("content");
+		//add a new post
+		Post post = new Post();
+		post.setUserId(userId);
+		post.setContent(content);
+		//post.setCreateTime(new Date());
+		//post.setUpdateTime(new Date());
+		boolean ifSucc = postService.addPost(post);
+		if(ifSucc) {
+			if (log.isInfoEnabled()) {
+				log.info("add post success!");
+			}
+		}
+		indexPage=new ModelAndView("redirect:/");
+		return indexPage;
+	}*/
 	
 	@RequestMapping(value="/delete/{id}")
 	public String deleteComment(@PathVariable("id") long id)	{
@@ -112,6 +167,7 @@ public class ForumController {
 		model.addObject("post", post);
 		return model;
 	}
+	
 	/*//post part
 	@RequestMapping(value = "/getTopics", method = RequestMethod.GET)
 	public ModelAndView list() {

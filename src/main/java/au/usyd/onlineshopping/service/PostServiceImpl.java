@@ -42,6 +42,25 @@ public class PostServiceImpl implements PostService {
 		Post post = postDao.addPost(user, newContent);
 		return post;
 	}
+
+	@Override
+	public List<Post> listPostsAndUsers() {
+		// TODO Auto-generated method stub
+		return postDao.listPostsAndUsers();
+	}
+
+	@Override
+	public Post selectById(Integer id) {
+		// TODO Auto-generated method stub
+		Post post= postDao.selectById(id);
+		return post;
+	}
+
+	@Override
+	public boolean addPost(Post post) {
+		// TODO Auto-generated method stub
+		return postDao.insert(post)>0;
+	}
 	
 	/*@Autowired
 	PostDao postDao;

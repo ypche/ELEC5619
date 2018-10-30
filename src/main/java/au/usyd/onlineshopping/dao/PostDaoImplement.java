@@ -63,10 +63,33 @@ public class PostDaoImplement implements PostDao {
 		Post post = new Post();
 		post.setPostTime(Calendar.getInstance().getTime());
 		post.setContent(newContent);
-		post.setUserID(user);
+		post.setUser(user);
 		post.setUserName(user.getName());
 		getSession().save(post);
 		return post;
+	}
+
+	@Override
+	public List<Post> listPostsAndUsers() {
+		// TODO Auto-generated method stub
+		Criteria criteria = getSession().createCriteria(Post.class);
+		
+		return (List<Post>)criteria.list();
+	}
+
+	@Override
+	public Post selectById(Integer id) {
+		// TODO Auto-generated method stub
+		Post post = (Post) getSession().get(Post.class, id);
+		return post;
+	}
+
+	@Override
+	public int insert(Post record) {
+		// TODO Auto-generated method stub
+		
+		
+		return 0; 
 	}
 	
 	

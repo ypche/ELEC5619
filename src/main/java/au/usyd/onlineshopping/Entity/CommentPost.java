@@ -22,12 +22,16 @@ public class CommentPost implements Serializable{
 	@Id
 	@GeneratedValue
 	@Column(name="Id")
-	private long id;
+	private Long id;
+	
 	
 	@Column
 	@NotEmpty
 	private String content;
 	
+	private Integer postId;
+	
+	private Integer commentUserId;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="post_id")
@@ -38,12 +42,20 @@ public class CommentPost implements Serializable{
 	private User user;
 	
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public Integer getPostId() {
+		return postId;
+	}
+	
+	public void setPostId(Integer postId) {
+		this.postId = postId;
 	}
 	
 	public Post getPost() {
@@ -68,5 +80,13 @@ public class CommentPost implements Serializable{
 	
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public Integer getCommentUserId() {
+		return commentUserId;
+	}
+	
+	public void setCommentUserId(Integer commentUserId) {
+		this.commentUserId = commentUserId;
 	}
 }

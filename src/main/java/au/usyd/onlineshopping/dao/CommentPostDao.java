@@ -8,7 +8,17 @@ import au.usyd.onlineshopping.Entity.Post;
 
 public interface CommentPostDao {
 	
+	//int insert(CommentPost record);
+	
+	int insertSelective(CommentPost record);
+	
+	List<CommentPost> getCommentsOfPost(Integer postId);
+	
+	
+	
 	public List<CommentPost> getCommentsByPost(Post post);
+	
+	int insert(CommentPost record);
 	
 	public CommentPost getCommentByID(long id);
 	
@@ -21,6 +31,8 @@ public interface CommentPostDao {
 	public void addComment(long userID, Post post);
 	
 	public void displayComments(List<CommentPost> comments);
+	
+	//List<CommentPost> getCommentsOfPost(Integer postId);
 	
 	/*public Topic getTopicById(long id);
 	

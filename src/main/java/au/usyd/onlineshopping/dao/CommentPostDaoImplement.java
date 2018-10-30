@@ -83,6 +83,24 @@ public class CommentPostDaoImplement implements CommentPostDao{
 			getSession().merge(comment);
 		}
 	}
+
+	@Override
+	public List<CommentPost> getCommentsOfPost(Integer postId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int insertSelective(CommentPost record) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int insert(CommentPost record) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 	/*@Autowired

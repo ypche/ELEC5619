@@ -21,4 +21,7 @@ public interface PostService{
 	public Post getPostById(long id);
 	public Post getPostByUser(User user);
 	public Post addPost(User user, String newContent);
+	public List<Post> listPostsAndUsers();
+	public Post selectById(Integer id);
+	public boolean addPost(Post post);
 }

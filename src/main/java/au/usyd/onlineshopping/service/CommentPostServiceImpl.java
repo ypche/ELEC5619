@@ -15,7 +15,7 @@ import au.usyd.onlineshopping.dao.CommentPostDao;
 public class CommentPostServiceImpl implements CommentPostService{
 	
 	@Autowired
-	CommentPostDao commentDao;
+	public CommentPostDao commentDao;
 
 	@Override
 	public List<CommentPost> getCommentsByPost(Post post) {
@@ -57,6 +57,18 @@ public class CommentPostServiceImpl implements CommentPostService{
 	public CommentPost getCommentByID(long id) {
 		// TODO Auto-generated method stub
 		return commentDao.getCommentByID(id);
+	}
+
+	@Override
+	public List<CommentPost> getCommentsOfPost(Integer postId) {
+		// TODO Auto-generated method stub
+		return commentDao.getCommentsOfPost(postId);
+	}
+
+	@Override
+	public boolean addReply(CommentPost commentPost) {
+		// TODO Auto-generated method stub
+		return commentDao.insert(commentPost)>0;
 	}
 	
 	/*@Override

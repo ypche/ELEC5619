@@ -36,7 +36,9 @@ public class Post implements Serializable {
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="user_id")
-	private User userID;
+	private User user;
+	
+	private Integer userId;
 	
 	@Transient
 	private String userName;
@@ -60,6 +62,13 @@ public class Post implements Serializable {
 		this.id = id;
 	}
 	
+	public Integer getUserId() {
+		return userId;
+	}
+	
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 	
 	public Date getPostTime() {
 		return postTime;
@@ -69,12 +78,12 @@ public class Post implements Serializable {
 		this.postTime = postTime;
 	}
 	
-	public User getUserID() {
-		return userID;
+	public User getUser() {
+		return user;
 	}
 	
-	public void setUserID(User userID) {
-		this.userID = userID;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	public List<CommentPost> getComments(){

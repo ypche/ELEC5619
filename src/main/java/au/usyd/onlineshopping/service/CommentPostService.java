@@ -9,6 +9,10 @@ public interface CommentPostService {
 	
 	public List<CommentPost> getCommentsByPost(Post post);
 	
+	public List<CommentPost> getCommentsOfPost(Integer postId);
+	
+	boolean addReply(CommentPost commentPost);
+	
 	public void addComment(CommentPost comment);
 	
 	public void deleteComment(long id);
@@ -20,6 +24,8 @@ public interface CommentPostService {
 	public void displayComments(List<CommentPost> comments);
 	
 	public CommentPost getCommentByID(long id);
+
+	//public List<CommentPost> getCommentsOfPost(Integer postId);
 	
 	/*public CommentPost getTopicById(long id);
 	
