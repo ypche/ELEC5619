@@ -78,7 +78,7 @@
 	                    <div class="btn-group">
 	                      <button type="button" class="btn btn-sm btn-outline-secondary">Add comment</button>
 	                    </div>
-	                    <small class="text-muted">Price: $${post.time}</small>
+	                    <small class="text-muted">Price: ${post.time}</small>
 	                  </div>
 	                </div>
 	              </div>
