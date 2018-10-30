@@ -47,6 +47,17 @@ public class ForumController {
 		List<Post> list = postService.getAllPosts();
 		return model;
 	}
+	
+	@RequestMapping("postlist")
+	public ModelAndView postList() {
+		ModelAndView mav= new ModelAndView();
+			List<Post> cs= postService.getAllPosts();
+			mav.addObject("cs", cs);
+			mav.setViewName("postlist");
+			return mav;
+	}
+	
+	
 	 
 	@RequestMapping(value="/getPosts", method=RequestMethod.GET)
 	public ModelAndView forum(HttpSession session) {
@@ -77,7 +88,7 @@ public class ForumController {
 		return model;
 	}
 	
-	@RequestMapping("/")
+	/*@RequestMapping("/")
 	public ModelAndView toMain(HttpSession session) {
 		ModelAndView indexPage=new ModelAndView("cate");
 		List<Post> posts=postService.listPostsAndUsers();
@@ -88,7 +99,7 @@ public class ForumController {
 		indexPage.addObject("posts", posts);
 		indexPage.addObject("user",user);
 		return indexPage;
-	}
+	}*/
 	
 	//get the detail info
 	/*@RequestMapping("/t/{id}")
@@ -157,6 +168,14 @@ public class ForumController {
 		ModelAndView model = new ModelAndView("addPost");
 		Post post = new Post();
 		model.addObject("postForm",post);
+		return model;
+	}
+	
+	@RequestMapping(value = "/addComments", method = RequestMethod.GET)
+	public ModelAndView addComments() {
+		ModelAndView model = new ModelAndView("addComments");
+		CommentPost commentPost = new CommentPost();
+		model.addObject("commentsForm", commentPost);
 		return model;
 	}
 	

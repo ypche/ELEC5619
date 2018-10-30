@@ -68,6 +68,7 @@
         <div class="container">
           <h1 class="jumbotron-heading">HappyReader</h1>
           <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+          <a class="navbar-brand" href="<%=basePath %>forum/postlist">Forum</a>
 		
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
   			<a class="navbar-brand" href="#">Category</a>		
@@ -77,6 +78,7 @@
 				      <a class="nav-item nav-link col-sm-5" href="<%=basePath %>book/genre/Science">Science</a>
 				      <a class="nav-item nav-link col-sm-5" href="<%=basePath %>book/genre/Toolbook">Toolbook</a>
 				      <a class="nav-item nav-link col-sm-5" href="<%=basePath %>book/genre/Family">Family</a>
+				      
 	   			 </div>
 	  		</div>
 		</nav>

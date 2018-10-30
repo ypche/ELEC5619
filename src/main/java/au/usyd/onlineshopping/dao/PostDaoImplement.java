@@ -91,6 +91,12 @@ public class PostDaoImplement implements PostDao {
 		
 		return 0; 
 	}
+
+	@Override
+	public List<Post> findAllTopics() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

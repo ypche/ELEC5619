@@ -22,7 +22,7 @@ public interface PostDao {
 	public int insert(Post record);
 	
 	
-	
+	public List<Post> findAllTopics();
 	/*public Post getPostById(long id);
 	
 	public Post getPostContent(String content);

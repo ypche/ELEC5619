@@ -46,18 +46,32 @@
 
     <main role="main">
 
-
+	<div>
+		
+	</div>
       <div class="album py-5 bg-light">
         <div class="container">
-
+		<form>
+			UserName： Peter
+			<br>
+			<a class="navbar-brand" href="<%=basePath %>forum/addComments">Content: The science Book is good!</a>
+		</form>
+		<br>
+		<br>
+		<form>
+			UserName:  Bob
+			<br>
+			<a class="navbar-brand" href="<%=basePath %>forum/addComments">Content: The children book is good!</a>
+			
+		</form>
           <div class="row">
-         	<c:forEach items="${postList}" var="post">
+         	<c:forEach items="${cs}" var="post" varStatus="st">
 	            <div class="col-md-3">
 	              <div class="card mb-4 box-shadow">
 	                <div class="card-body">
-	                <p class="card-text" style="color: navy; font-family: sans-serif; font-weight: bold;">${post.content}</p>
+	                <p class="card-text" style="color: navy; font-family: sans-serif; font-weight: bold;">${post.id}</p>
 	                 <div >
-	                 	<span class="card-text" style="color:activeborder; font-family: sans-serif;"> ${post.user}</span>
+	                 	<span class="card-text" style="color:activeborder; font-family: sans-serif;"> ${post.name}</span>
 	                 </div>
 	                 <hr>
 	                  <div class="d-flex justify-content-between align-items-center">
@@ -73,22 +87,11 @@
           </div>
         </div>
       </div>
-
+	 <div>
+	 	<a class="navbar-brand" href="<%=basePath %>forum/addPost">Add a new Post.</a>
+	 </div>
     </main>
 
-    <footer >
-      <div class="container">
-      	<a class="row">
-			<img class="card-img-top col-md-2" height="200" src="https://www.booktopia.com.au/http_coversbooktopiacomau/big/9781489462466/the-magic-misfits-the-second-story.jpg">
-			<img class="card-img-top col-md-2" height="200" alt="" src="https://www.booktopia.com.au/http_coversbooktopiacomau/big/9781489461803/xbaffled-.jpg.pagespeed.ic.o454HIxJVl.jpg">
-		    <img class="card-img-top col-md-2" height="200" alt="" src="https://www.booktopia.com.au/http_coversbooktopiacomau/150/9781489461681/my-mum-tracy-beaker.jpg.pagespeed.ce.a3Fxu7PtJg.jpg">
-	        <img class="card-img-top col-md-2" height="200" alt="" src="https://www.booktopia.com.au/http_coversbooktopiacomau/150/9781489437983/incognito.jpg.pagespeed.ce.h7xRwTGF4t.jpg">
-		    <img class="card-img-top col-md-2" height="200" alt="" src="https://www.booktopia.com.au/http_coversbooktopiacomau/150/9781489458001/sir-charlie-stinky-socks.jpg.pagespeed.ce.LBbErAXNYD.jpg">
-		    <img class="card-img-top col-md-2" height="200" alt="" src="https://www.booktopia.com.au/http_coversbooktopiacomau/150/9781489458056/the-steve-smallman-collection.jpg.pagespeed.ce.9aX2fQXhII.jpg">
-<!-- 		    <img class="card-img-top col-md-2" alt="" src="https://www.booktopia.com.au/http_coversbooktopiacomau/150/9781489458636/odd-and-the-frost-giants.jpg.pagespeed.ce.zsbqDf4dPd.jpg"> -->
-		</a>
-      </div>
-    </footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
