@@ -48,4 +48,10 @@ public class DeliveryServiceImpl implements DeliveryService {
 		return deliveryDao.getAllDeliveriesWithBoughtItems();
 	}
 
+	@Override
+	public boolean checkCode(String code, long bid, long uid) {
+		// TODO Auto-generated method stub
+		return deliveryDao.checkCode(code, bid, uid);
+	}
+
 }

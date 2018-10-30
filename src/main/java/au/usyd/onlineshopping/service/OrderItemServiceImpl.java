@@ -77,4 +77,10 @@ public class OrderItemServiceImpl implements OrderItemService {
 		return itemDao.getBookDescriptionOfItem(item);
 	}
 
+	@Override
+	public String getStatusByBookID(long bookID, long userID) {
+		// TODO Auto-generated method stub
+		return itemDao.getStatusByBookID(bookID, userID);
+	}
+
 }

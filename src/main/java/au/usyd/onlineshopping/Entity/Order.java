@@ -3,6 +3,7 @@ package au.usyd.onlineshopping.Entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -31,7 +32,7 @@ public class Order implements Serializable {
 	@Column(name="order_date")
 	private Date orderDate;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="user_id")
 	private User userID;
 	
@@ -41,8 +42,8 @@ public class Order implements Serializable {
 	@Transient
 	private String userName;
 	
-	@OneToMany(targetEntity=OrderItem.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	private List<OrderItem> items;
+	@OneToMany(targetEntity=OrderItem.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	private Set<OrderItem> items;
 
 	public long getId() {
 		return id;
@@ -84,11 +85,11 @@ public class Order implements Serializable {
 		this.status = status;
 	}
 
-	public List<OrderItem> getItems() {
+	public Set<OrderItem> getItems() {
 		return items;
 	}
 
-	public void setItems(List<OrderItem> items) {
+	public void setItems(Set<OrderItem> items) {
 		this.items = items;
 	}
 

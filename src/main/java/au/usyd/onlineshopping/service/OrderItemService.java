@@ -17,4 +17,5 @@ public interface OrderItemService {
 	public OrderItem getOrderItemByID(long id);
 	public void buyOrderItems(List<OrderItem> items);
 	public void deliveryOrderItem(OrderItem item);
+	public String getStatusByBookID(long bookID, long userID);
 }

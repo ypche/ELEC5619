@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 @Entity
 public class Book implements Serializable{
@@ -36,6 +37,9 @@ public class Book implements Serializable{
 	private String bookpath;
 	
 	private String image;
+	
+	@Transient
+	private String status;
 
 	@OneToMany(targetEntity=OrderItem.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private Set<OrderItem> orderItems;
@@ -124,6 +128,14 @@ public class Book implements Serializable{
 		this.image = image;
 	}
 	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public Set<OrderItem> getOrderItems() {
 		return orderItems;
 	}

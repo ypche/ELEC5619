@@ -25,9 +25,9 @@
     <!-- Custom styles for this template -->
     <link href="<%=basePath %>css/album.css" type="text/css" rel="stylesheet">
     
-	<title>Shopping Delivery</title>
+	<title>Manage User</title>
 	<script type="text/javascript">
-		function deliveryCheckedItems() {
+		function deleteCheckedItems() {
 			var cks = document.getElementsByName("checkIds");
 			var str = "";
 			for (var i = 0; i < cks.length; i++) {
@@ -39,7 +39,7 @@
 			if (str == "") {
 				return;
 			}
-			window.location.href = "/onlineshopping/delivery/sendCode/" + str;
+			window.location.href = "/onlineshopping/user/delete/" + str;
 		}
 		
 		function checkAllItems() {
@@ -62,10 +62,10 @@
   			<div class="col-md-2 text-right"></div>
   			<div class="col-md-8 text-left">
   				<h1 style="font-family: Baskerville; font-weight: bolder;">
-  				<span>
+  				<!-- <span>
 	  				<img width="50" height="50" alt="delivery" src="https://doc-14-88-docs.googleusercontent.com/docs/securesc/1lhra9ur6rbc8etdjasmei79ag64jeuu/5od0huh7q3k19kvqejgjb4scqgskg3in/1540900800000/01552601290929276177/01552601290929276177/1WW1B7tbeHBk9dGKsvm3t56MYYNqDhtJ3?e=download">
-  				</span>
-				Delivery
+  				</span> -->
+				Manage User
 				</h1>
   			</div>
   			<div class="col-md-2"></div>
@@ -79,19 +79,19 @@
 					<thead class="thead-light">
 						<tr>
 							<th scope="col"><input type="checkbox" name="checkAll" onClick="checkAllItems()"></th>
-							<th scope="col">Book Title</th>
-							<th scope="col">Buyer</th>
+							<th scope="col">Name</th>
+							<th scope="col">Email</th>
 							<th scope="col">Operation</th>
 						</tr>
 					</thead>
-					<c:forEach items="${ItemList}" var="deliveryItem">
+					<c:forEach items="${ItemList}" var="user">
 						<tr>
-							<td><input type="checkbox" id="checkIds" name="checkIds" value="${deliveryItem.id}"></td>
-							<td>${deliveryItem.bookTitle}</td>
-							<td>${deliveryItem.bookBuyer}</td>
+							<td><input type="checkbox" id="checkIds" name="checkIds" value="${user.id}"></td>
+							<td>${user.name}</td>
+							<td>${user.email}</td>
 							<td>
-								<spring:url value="/delivery/sendCode/${deliveryItem.id}" var="sendURL"></spring:url>
-								<a href="${sendURL}">Delivery</a>
+								<spring:url value="/user/delete/${user.id}" var="deleteURL"></spring:url>
+								<a href="${deleteURL}">Delete</a>
 							</td>
 						</tr>
 					
@@ -100,7 +100,7 @@
 						<td></td>
 						<td></td>
 						<td></td>
-						<td><button class="btn btn-primary" type="button" onClick="deliveryCheckedItems()">Delivery Items</button></td>
+						<td><button class="btn btn-primary" type="button" onClick="deleteCheckedItems()">Delete Users</button></td>
 					</tr>
 				</table>	
 			</div>

@@ -1,5 +1,7 @@
 package au.usyd.onlineshopping.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,6 +42,12 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		long id = userDao.login(user);
 		return id;
+	}
+
+	@Override
+	public List<User> getOrdinaryUsers() {
+		// TODO Auto-generated method stub
+		return userDao.getOrdinaryUsers();
 	}
 
 }

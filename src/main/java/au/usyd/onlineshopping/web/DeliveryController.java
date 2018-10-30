@@ -19,6 +19,7 @@ import au.usyd.onlineshopping.Entity.Book;
 import au.usyd.onlineshopping.Entity.Delivery;
 import au.usyd.onlineshopping.Entity.OrderItem;
 import au.usyd.onlineshopping.Entity.User;
+import au.usyd.onlineshopping.service.BookService;
 import au.usyd.onlineshopping.service.DeliveryService;
 import au.usyd.onlineshopping.service.OrderItemService;
 import au.usyd.onlineshopping.service.UserService;
@@ -35,6 +36,8 @@ public class DeliveryController {
 	public UserService userService;
 	@Autowired
 	public OrderItemService itemService;
+	@Autowired
+	public BookService bookService;
 	
 	@RequestMapping(value="", method=RequestMethod.GET)
 	public ModelAndView getAllDeliveries(HttpSession session) {
@@ -64,5 +67,23 @@ public class DeliveryController {
 			itemService.deliveryOrderItem(delivery.getItem());
 		}
 		return "redirect:/delivery";
+	}
+	
+	@RequestMapping(value="/download/{download}")
+	public String downloadBook(@PathVariable("download") String download, HttpSession session) {
+		String[] dList = download.split(",");
+		long bid = Long.parseLong(dList[0]);
+		String code = dList[1];
+		
+		if (session.getAttribute("userID") == null) {
+			return "redirect:/user/login";
+		}
+		
+		long userID = (Long) session.getAttribute("userID");
+		if (deliveryService.checkCode(code, bid, userID)) {
+			Book book = bookService.getBookById(bid);
+			return "redirect:" + book.getBookpath();
+		}
+		return "redirect:/book/getBooks";
 	}
 }

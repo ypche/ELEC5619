@@ -13,4 +13,5 @@ public interface DeliveryDao {
 	public void addDeliveriesFromOrderItems(List<OrderItem> items, User user);
 	public void generatePurchaseCode(long id);
 	public List<Delivery> getAllDeliveriesWithBoughtItems();
+	public boolean checkCode(String code, long bid, long uid);
 }

@@ -11,23 +11,54 @@
 %>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Register</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Register</title>
 
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- Bootstrap core CSS -->
+    <link href="<%=basePath %>css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+    <!-- Custom styles for this template -->
+    <link href="<%=basePath %>css/album.css" type="text/css" rel="stylesheet">
 </head>
 <body>
+	<%@ include file="header.jsp" %>
 	<spring:url value="/user/saveUser" var="addURL" />
-
-	<div class="container">
+	<form class="container">
+  		<div class="row" style="margin-top: 100px">
+  			<div class="col-md-2"></div>
+  			<div class="col-md-8 text-left">
+  				<h1 style="font-family: Baskerville; font-weight: bolder;">
+				<span>
+  					<img width="50" height="50" alt="" src="https://doc-0c-88-docs.googleusercontent.com/docs/securesc/1lhra9ur6rbc8etdjasmei79ag64jeuu/rdsu6qom73rjs71q77sr5lrdjqt6va02/1540900800000/01552601290929276177/01552601290929276177/1R7koohRf-8dTdlGlVgAPOfCgUsV4ms7W?e=download">
+  				</span>
+  				Register New Account
+				</h1>
+  			</div>
+  			<div class="col-md-2"></div>
+  		</div>
+	</form>
+	<form:form action="${addURL}" method="post" modelAttribute="userForm"
+		enctype="multipart/form-data"
+		class="container">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+			<div class="form-group">
+				<label for="inputEmail">Email</label>
+				<form:input path="email" class="form-control" id="inputEmail" placeholder="Enter Email" />
+			</div>
+			<div class="form-group">
+				<label for="inputUserName">Name</label>
+				<form:input id="inputUserName" path="name" placeholder="Enter User Name" class="form-control" />
+			</div>
+			<div class="form-group">
+				<label for="inputPassword">Password</label>
+				<form:password id="inputPassword" path="password" placeholder="Enter Password" class="form-control" />
+			</div>
+			<input type="submit" value="Register" class="btn btn-primary" />
+		</div>
+		<div class="col-md-2"></div>
+	</form:form>
+<%-- 	<div class="container">
 
 
 		<div class="row" style="margin-top: 200px;">
@@ -70,7 +101,7 @@
 			</form:form>
 		</div>
 	</div>
-
+ --%>
 	<%-- <h3>Register New Account</</h3>
     <form:form action="${addURL}" method="post" modelAttribute="userForm" enctype="multipart/form-data">
         <table>

@@ -26,23 +26,13 @@
 
     <!-- Custom styles for this template -->
     <link href="<%=basePath %>css/album.css" type="text/css" rel="stylesheet">
-          <div class="navbar navbar-dark bg-dark box-shadow">
-        <div class="container d-flex justify-content-between">
-          <a href="#" class="navbar-brand d-flex align-items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-            <strong>HappyReader</strong>
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        </div>
-      </div>
   </head>
 <body >
+	<%@ include file="header.jsp" %>
 	<div class="container-fluid" style="padding-top: 50px">
 		<div class="row">
 			<div class="col-md-4">
-				<img class="card-img-top" alt="" src="/image/${book.image}" width="200" height="350">
+				<img class="card-img-top" alt="" src="${book.image}" width="200">
 			</div>
 			<div class="col-md-6" style="padding-top: 40px">
 				<h1 style="font: bold; padding-left: 40px; font-family: fantasy;">
@@ -59,7 +49,20 @@
 					  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp;
 					 <div class="btn-group">
 	                      <button type="button" class="btn btn-sm btn-outline-secondary">To Wishlist</button>
-	                      <button type="button" class="btn btn-sm btn-outline-secondary">Add Cart</button>
+	                      <c:choose>
+	                      	<c:when test="${book.status == 'InCart' }">
+	                      		<button type="button" class="btn btn-sm btn-outline-secondary" disabled>In Cart</button>
+	                      	</c:when>
+	                      	<c:when test="${book.status == 'Bought' }">
+	                      		<button type="button" class="btn btn-sm btn-outline-secondary" disabled>Bought</button>
+	                      	</c:when>
+	                      	<c:when test="${book.status == 'Delivered' }">
+	                      		<button type="button" class="btn btn-sm btn-outline-secondary">Download</button>
+	                      	</c:when>
+	                      	<c:otherwise>
+	                      		<button type="button" class="btn btn-sm btn-outline-secondary" onClick="location.href='/onlineshopping/cart/addItem/${book.id}';">Add Cart</button>
+	                      	</c:otherwise>
+	                      </c:choose>
                     </div>
 				</div>
 				<hr>

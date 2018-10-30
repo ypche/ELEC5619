@@ -21,7 +21,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Album example for Bootstrap</title>
+    <title>Books</title>
 
     <!-- Bootstrap core CSS -->
     <link href="<%=basePath %>css/bootstrap.min.css" rel="stylesheet">
@@ -33,17 +33,9 @@
   <body>
 
     <header>
-
-      <div class="navbar navbar-dark bg-dark box-shadow">
-        <div class="container d-flex justify-content-between">
-          <a href="#" class="navbar-brand d-flex align-items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-            <strong>HappyReader</strong>
-          </a>
-        </div>
-      </div>
+    	<%@ include file="header.jsp" %>
     </header>
-
+	<br/><br/>
     <main role="main">
 
 
@@ -55,7 +47,7 @@
 	            <div class="col-md-3">
 	              <div class="card mb-4 box-shadow">
               		<c:if test="${book.image!=null}">
-						<img class="card-img-top" alt="" src="/image/${book.image}" width="150" height="200">
+						<img class="card-img-top" alt="" src="${book.image}" height="350">
 					</c:if>
 	<!--                 <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap"> -->
 	                <div class="card-body">
@@ -66,7 +58,20 @@
 	                 <hr>
 	                  <div class="d-flex justify-content-between align-items-center">
 	                    <div class="btn-group">
-	                      <button type="button" class="btn btn-sm btn-outline-secondary">Add Cart</button>
+	                      <c:choose>
+	                      	<c:when test="${book.status == 'InCart' }">
+	                      		<button type="button" class="btn btn-sm btn-outline-secondary" disabled>In Cart</button>
+	                      	</c:when>
+	                      	<c:when test="${book.status == 'Bought' }">
+	                      		<button type="button" class="btn btn-sm btn-outline-secondary" disabled>Bought</button>
+	                      	</c:when>
+	                      	<c:when test="${book.status == 'Delivered' }">
+	                      		<button type="button" class="btn btn-sm btn-outline-secondary">Download</button>
+	                      	</c:when>
+	                      	<c:otherwise>
+	                      		<a href="/onlineshopping/cart/addItem/${book.id}"><button type="button" class="btn btn-sm btn-outline-secondary">Add Cart</button></a>
+	                      	</c:otherwise>
+	                      </c:choose>
 	                    </div>
 	                    <small class="text-muted">Price: $${book.price}</small>
 	                  </div>

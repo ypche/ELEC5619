@@ -38,6 +38,7 @@ public class UserDaoImplement implements UserDao {
 	@Override
 	public void addUser(User user) {
 		// TODO Auto-generated method stub
+		user.setRole("user");
 		getSession().save(user);
 	}
 
@@ -61,6 +62,15 @@ public class UserDaoImplement implements UserDao {
 			return list.get(0).getId();
 		else
 			return -1;
+	}
+
+	@Override
+	public List<User> getOrdinaryUsers() {
+		// TODO Auto-generated method stub
+		Criteria criteria = getSession().createCriteria(User.class);
+		criteria.add(Restrictions.eq("role", "user"));
+		List<User> list = criteria.list();
+		return list;
 	}
 
 }

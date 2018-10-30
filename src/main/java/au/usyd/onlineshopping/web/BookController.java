@@ -26,6 +26,7 @@ import au.usyd.onlineshopping.Entity.Book;
 import au.usyd.onlineshopping.Entity.PageBean;
 import au.usyd.onlineshopping.Entity.User;
 import au.usyd.onlineshopping.service.BookService;
+import au.usyd.onlineshopping.service.OrderItemService;
 import au.usyd.onlineshopping.service.PageBeanService;
 import au.usyd.onlineshopping.service.UserService;
 
@@ -40,6 +41,8 @@ public class BookController {
 	public PageBeanService pageBeanService;	
 	@Autowired
 	public UserService userService;
+	@Autowired
+	public OrderItemService itemService;
 	
 //	@RequestMapping(value = "/getBooks", method = RequestMethod.GET)
 //	public ModelAndView list() {
@@ -57,13 +60,22 @@ public class BookController {
 		}
 		PageBean<Book> pb = pageBeanService.getBookWithPage(Integer.parseInt(pageNum));	
 		ModelAndView model = new ModelAndView("index");
-		model.addObject("pageBean",pb);
-		
+
+		long userID = -1;
 		if (session.getAttribute("userID") != null) {
-			long userID = (Long) session.getAttribute("userID");
+			userID = (Long) session.getAttribute("userID");
 			User currentUser = userService.getUserById(userID);
 			model.addObject("username", currentUser.getName());
 		}
+		
+		if (userID != -1) {
+			for (Book book : pb.getList()) {
+				book.setStatus(itemService.getStatusByBookID(book.getId(), userID));
+			}
+		}
+		
+		model.addObject("pageBean",pb);
+		
 		return model;
 	}
 
@@ -87,10 +99,21 @@ public class BookController {
 	
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ModelAndView getBookById(@PathVariable("id") long id) {
+	public ModelAndView getBookById(@PathVariable("id") long id, HttpSession session) {
 		ModelAndView model = new ModelAndView("bookDetail");
 		Book book = (Book)bookService.getBookById(id);
 		model.addObject("book",book);
+		
+		long userID = -1;
+		if (session.getAttribute("userID") != null) {
+			userID = (Long) session.getAttribute("userID");
+			User currentUser = userService.getUserById(userID);
+			model.addObject("username", currentUser.getName());
+		}
+		
+		if (userID != -1) {
+			book.setStatus(itemService.getStatusByBookID(book.getId(), userID));
+		}
 		return model;
 	}
 	
@@ -126,10 +149,23 @@ public class BookController {
 	}
 	
 	@RequestMapping(value = "/genre/{genre}")
-	public ModelAndView getBooksByGenre(@PathVariable("genre")String genre){
+	public ModelAndView getBooksByGenre(@PathVariable("genre")String genre, HttpSession session){
 		ModelAndView model = new ModelAndView("genrebooklist");
 		List<Book> list = bookService.getBooksByGenre(genre);
 		model.addObject("genrelist",list);
+		
+		long userID = -1;
+		if (session.getAttribute("userID") != null) {
+			userID = (Long) session.getAttribute("userID");
+			User currentUser = userService.getUserById(userID);
+			model.addObject("username", currentUser.getName());
+		}
+		
+		if (userID != -1) {
+			for (Book book : list) {
+				book.setStatus(itemService.getStatusByBookID(book.getId(), userID));
+			}
+		}
 		return model;
 	}
 	
@@ -137,12 +173,25 @@ public class BookController {
 	
 	@RequestMapping(value = "/search")
 	public ModelAndView searchBooksByKeyword(HttpServletRequest request, 
-	        HttpServletResponse response){
+	        HttpServletResponse response, HttpSession session){
 		String keyword = request.getParameter("keyword");
 		keyword = keyword.trim();
 		ModelAndView model = new ModelAndView("searchbooklist");
 		List<Book> list = bookService.getBooksByKeyWord(keyword);
 		model.addObject("searchlist",list);
+		
+		long userID = -1;
+		if (session.getAttribute("userID") != null) {
+			userID = (Long) session.getAttribute("userID");
+			User currentUser = userService.getUserById(userID);
+			model.addObject("username", currentUser.getName());
+		}
+		
+		if (userID != -1) {
+			for (Book book : list) {
+				book.setStatus(itemService.getStatusByBookID(book.getId(), userID));
+			}
+		}
 		return model;
 	}
 	

@@ -8,9 +8,11 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import au.usyd.onlineshopping.Entity.Book;
 import au.usyd.onlineshopping.Entity.Delivery;
 import au.usyd.onlineshopping.Entity.OrderItem;
 import au.usyd.onlineshopping.Entity.User;
@@ -20,6 +22,12 @@ public class DeliveryDaoImplement implements DeliveryDao {
 
 	@Autowired
 	public SessionFactory sessionFactory;
+	
+	@Autowired
+	public BookDao bookDao;
+	
+	@Autowired
+	public UserDao userDao;
 	
 	protected Session getSession() {
 		return sessionFactory.getCurrentSession();
@@ -63,7 +71,7 @@ public class DeliveryDaoImplement implements DeliveryDao {
 	}
 
 	public String generateRandomString(int length) {
-		String ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_!@#$%^&*[]{}?<>";
+		String ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		SecureRandom RANDOM = new SecureRandom();
 		StringBuilder sb = new StringBuilder();
         for (int i = 0; i < length; ++i) {
@@ -91,5 +99,23 @@ public class DeliveryDaoImplement implements DeliveryDao {
 			deliveries.remove(r);
 		}
 		return deliveries;
+	}
+
+	@Override
+	public boolean checkCode(String code, long bid, long uid) {
+		// TODO Auto-generated method stub
+		Book book = bookDao.getBookById(bid);
+		User user = userDao.getUserById(uid);
+		Criteria criteria = getSession().createCriteria(Delivery.class);
+		criteria.add(Restrictions.eq("book", book));
+		criteria.add(Restrictions.eq("user", user));
+		List<Delivery> deliveries = criteria.list();
+		if (deliveries.size() > 0) {
+			Delivery delivery = deliveries.get(0);
+			if (delivery.getPurchaseCode().equals(code)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

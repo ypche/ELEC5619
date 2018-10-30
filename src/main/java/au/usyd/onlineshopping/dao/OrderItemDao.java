@@ -17,4 +17,5 @@ public interface OrderItemDao {
 	public void addOrderItem(long bookID, Order order);
 	public void buyOrderItems(List<OrderItem> items);
 	public void deliveryOrderItem(OrderItem item);
+	public String getStatusByBookID(long bookID, long userID);
 }

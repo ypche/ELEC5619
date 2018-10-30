@@ -27,7 +27,7 @@ public class OrderItem implements Serializable {
 	@Column(name="id")
 	private long id;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="order_id")
 	private Order order;
 	

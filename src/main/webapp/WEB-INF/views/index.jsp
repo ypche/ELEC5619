@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
+
 
 <%
       String path = request.getContextPath();
@@ -26,46 +28,21 @@
 
     <!-- Custom styles for this template -->
     <link href="<%=basePath %>css/album.css" type="text/css" rel="stylesheet">
+    
+    <script type="text/javascript">
+    	function download(bid) {
+    		var str = "";
+    		var code = document.getElementById("inputCode");
+    		str = bid + "," + code.value;
+    		window.location.href="/onlineshopping/delivery/download/" + str;
+    	}
+    </script>
   </head>
 
   <body>
 
     <header>
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-  	<div class="container">
-      <a href="<%=basePath %>book/getBooks" class="navbar-brand d-flex align-items-center">
-        <img width="20" height="20" alt="" src="https://doc-00-88-docs.googleusercontent.com/docs/securesc/1lhra9ur6rbc8etdjasmei79ag64jeuu/725dvpemcaa8gcnqjp5f9elovo0tunp2/1540900800000/01552601290929276177/01552601290929276177/1xsv1SLUU0uBRiop9xazGwArXswPAl3XW?e=download&nonce=f1ju7vdo00m3m&user=01552601290929276177&hash=omdjkaps6nrjuinda3nnlllp0o6huvj2">
-        <strong>&nbspHappyReader</strong>
-      </a>
-      <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="<%=basePath%>">Home</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="<%=basePath%>cart">Cart</a>
-          </li>
-          
-        </ul>
-        <c:choose>
-        	<c:when test="${sessionScope.userID eq null}">
-        		<div class="span12">
-					<a class="btn btn-outline-info" href="<%=basePath%>user/register" role="button">Signup</a>&nbsp
-					<a class="btn btn-outline-success" href="<%=basePath%>user/login" role="button">Signin</a>
-				</div>
-        	</c:when>
-        	<c:otherwise>
-        		<a class="btn btn-dark" href="" role="button">${username}</a>&nbsp
-        		<a class="btn btn-secondary" href="<%=basePath %>user/logout" role="button">Logout</a>
-        	</c:otherwise>
-        </c:choose>
-      </div>
-      </div>
-    </nav>
+    	<%@ include file="header.jsp" %>
     </header>
 
     <main role="main">
@@ -73,8 +50,7 @@
       <section class="jumbotron text-center" >
         <div class="container">
           <h1 class="jumbotron-heading">HappyReader</h1>
-          <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
-		
+          
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
   			<a class="navbar-brand" href="#">Category</a>		
 	  		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -115,18 +91,53 @@
 	                  <div class="d-flex justify-content-between align-items-center">
 	                    <div class="btn-group">
 	                      <button type="button" class="btn btn-sm btn-outline-secondary">To Wishlist</button>
-	                      <a href="/onlineshopping/cart/addItem/${book.id}"><button type="button" class="btn btn-sm btn-outline-secondary">Add Cart</button></a>
+	                      <c:choose>
+	                      	<c:when test="${book.status == 'InCart' }">
+	                      		<button type="button" class="btn btn-sm btn-outline-secondary" disabled>In Cart</button>
+	                      	</c:when>
+	                      	<c:when test="${book.status == 'Bought' }">
+	                      		<button type="button" class="btn btn-sm btn-outline-secondary" disabled>Bought</button>
+	                      	</c:when>
+	                      	<c:when test="${book.status == 'Delivered' }">
+	                      		<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#downloadModal">Download</button>
+		                      	<div class="modal fade" id="downloadModal" tabindex="-1" role="dialog" aria-labelledby="downloadModalLabel" aria-hidden="true">
+								  <div class="modal-dialog" role="document">
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <h5 class="modal-title" id="downloadModalLabel">Download</h5>
+								        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								          <span aria-hidden="true">&times;</span>
+								        </button>
+								      </div>
+								      <div class="modal-body">
+								      	<div class="form-group">
+											<label for="inputCode">Purchase Code</label>
+											<input class="form-control" id="inputCode" placeholder="Enter Purchase Code" />
+										</div>
+								      </div>
+								      <div class="modal-footer">
+								        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								        <button type="button" class="btn btn-primary" onClick="download('${book.id}')">OK</button>
+								      </div>
+								    </div>
+								  </div>
+								</div>
+							</c:when>
+	                      	<c:otherwise>
+	                      		<button type="button" class="btn btn-sm btn-outline-secondary" onClick="location.href='/onlineshopping/cart/addItem/${book.id}';">Add Cart</button>
+	                      	</c:otherwise>
+	                      </c:choose>
 	                    </div>
 	                    <small class="text-muted">Price: $${book.price}</small>
 	                  </div>
 	                </div>
 	              </div>
 	            </div>
+				
 			</c:forEach>
           </div>
         </div>
       </div>
-      
      <!-- --------------------------------分页功能--------------------------------- --> 
     <div class="container" align="center">
 		<%-- 构建分页导航 --%>

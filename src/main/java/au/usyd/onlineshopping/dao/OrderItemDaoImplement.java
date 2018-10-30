@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import au.usyd.onlineshopping.Entity.Book;
 import au.usyd.onlineshopping.Entity.Order;
 import au.usyd.onlineshopping.Entity.OrderItem;
+import au.usyd.onlineshopping.Entity.User;
 
 @Repository
 public class OrderItemDaoImplement implements OrderItemDao {
@@ -25,6 +26,9 @@ public class OrderItemDaoImplement implements OrderItemDao {
 	
 	@Autowired
 	public BookDao bookDao;
+	
+	@Autowired
+	public UserDao userDao;
 	
 	protected Session getSession() {
 		return sessionFactory.getCurrentSession();
@@ -51,6 +55,15 @@ public class OrderItemDaoImplement implements OrderItemDao {
 	public void deleteOrderItem(long id) {
 		// TODO Auto-generated method stub
 		OrderItem item = (OrderItem) getSession().get(OrderItem.class, id);
+		Order order = item.getOrder();
+		Book book = item.getBook();
+		
+		double total = order.getTotal();
+		total -= book.getPrice();
+		total = Double.parseDouble(String.format("%.2f", total));
+		order.setTotal(total);
+		getSession().merge(order);
+		
 		getSession().delete(item);
 	}
 
@@ -75,6 +88,12 @@ public class OrderItemDaoImplement implements OrderItemDao {
 		item.setOrder(order);
 		item.setStatus("InCart");
 		getSession().save(item);
+		
+		double total = order.getTotal();
+		total += book.getPrice();
+		total = Double.parseDouble(String.format("%.2f", total));
+		order.setTotal(total);
+		getSession().merge(order);
 	}
 
 	@Override
@@ -93,6 +112,14 @@ public class OrderItemDaoImplement implements OrderItemDao {
 		for (OrderItem item : items) {
 			item.setStatus("Bought");
 			getSession().merge(item);
+			
+			Order order = item.getOrder();
+			double total = order.getTotal();
+			Book book = item.getBook();
+			total -= book.getPrice();
+			total = Double.parseDouble(String.format("%.2f", total));
+			order.setTotal(total);
+			getSession().merge(order);
 		}
 	}
 
@@ -107,6 +134,23 @@ public class OrderItemDaoImplement implements OrderItemDao {
 	public String getBookDescriptionOfItem(OrderItem item) {
 		// TODO Auto-generated method stub
 		return item.getBook().getDescription();
+	}
+
+	@Override
+	public String getStatusByBookID(long bookID, long userID) {
+		// TODO Auto-generated method stub
+		String status = "";
+		Book book = bookDao.getBookById(bookID);
+		Criteria criteria = getSession().createCriteria(OrderItem.class);
+		criteria.add(Restrictions.eq("book", book));
+		List<OrderItem> items = criteria.list();
+		for (OrderItem item : items) {
+			if (item.getOrder().getUserID().getId() == userID) {
+				status = item.getStatus();
+				break;
+			}
+		}
+		return status;
 	}
 
 }

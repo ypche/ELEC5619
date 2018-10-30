@@ -42,8 +42,8 @@ public class User implements Serializable {
 	@Column(name="role")
 	private String role;
 	
-	@OneToMany(targetEntity=Order.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	private List<Order> orders;
+	@OneToMany(targetEntity=Order.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	private Set<Order> orders;
 	
 	@OneToMany(targetEntity=Delivery.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private Set<Delivery> deliveries;
@@ -88,11 +88,11 @@ public class User implements Serializable {
 		this.role = role;
 	}
 
-	public List<Order> getOrders() {
+	public Set<Order> getOrders() {
 		return orders;
 	}
 
-	public void setOrders(List<Order> orders) {
+	public void setOrders(Set<Order> orders) {
 		this.orders = orders;
 	}
 

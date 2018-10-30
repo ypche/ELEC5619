@@ -6,6 +6,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -90,7 +91,8 @@ public class CartController {
 		}
 		order.setUserName(currentUser.getName());
 		itemService.addOrderItem(bid, order);
-		return "redirect:/cart";
+		
+		return "redirect:/book/getBooks";
 	}
 	
 	@RequestMapping(value="/purchase/{items}", method=RequestMethod.GET)
