@@ -97,7 +97,7 @@
   			<div class="col-md-8 text-left">
   				<h1 style="font-family: Baskerville; font-weight: bolder;">
 				<span>
-  					<img width="50" height="50" alt="" src="https://doc-0c-88-docs.googleusercontent.com/docs/securesc/1lhra9ur6rbc8etdjasmei79ag64jeuu/3j79fo8rtjrek7tpemvg594qtvi0ir5p/1540872000000/01552601290929276177/01552601290929276177/1fxRlj42b0zQuZlRTqA4QzolKHvDLeWPg?e=download&nonce=cbibeusd28dko&user=01552601290929276177&hash=pkoo7om700udaa1jk4guqgq">
+  					<img width="50" height="50" alt="" src="https://doc-0c-88-docs.googleusercontent.com/docs/securesc/1lhra9ur6rbc8etdjasmei79ag64jeuu/sf7efftu59rputb0oqip8me646cfsfgf/1540900800000/01552601290929276177/01552601290929276177/1fxRlj42b0zQuZlRTqA4QzolKHvDLeWPg?e=download">
   				</span>
   				Hello, <span>${username}</span>
 				</h1>

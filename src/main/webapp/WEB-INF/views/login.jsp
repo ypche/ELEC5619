@@ -11,32 +11,72 @@
 %>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Login</title>
-<!-- Bootstrap core CSS -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
 
+    <!-- Bootstrap core CSS -->
+    <link href="<%=basePath %>css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Custom styles for this template -->
-
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- Custom styles for this template -->
+    <link href="<%=basePath %>css/album.css" type="text/css" rel="stylesheet">
+    
+    <title>Login</title>
 </head>
 <body>
-	<spring:url value="/user/loginUser" var="loginURL" />
+	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 	<div class="container">
-		<div class="row" style="margin-top: 200px;">
-			<h3 class="text-center col-md-3 col-md-offset-5"
-				style="margin-bottom: 50px;">Login</h3>
-		</div>
+      <a href="<%=basePath %>book/getBooks" class="navbar-brand d-flex align-items-center">
+        <img width="20" height="20" alt="" src="https://doc-00-88-docs.googleusercontent.com/docs/securesc/1lhra9ur6rbc8etdjasmei79ag64jeuu/725dvpemcaa8gcnqjp5f9elovo0tunp2/1540900800000/01552601290929276177/01552601290929276177/1xsv1SLUU0uBRiop9xazGwArXswPAl3XW?e=download&nonce=f1ju7vdo00m3m&user=01552601290929276177&hash=omdjkaps6nrjuinda3nnlllp0o6huvj2">
+        <strong>&nbspHappyReader</strong>
+      </a>
+      <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="<%=basePath%>">Home</a>
+          </li>
 
-		<div class="row">
-			<form:form class="form-horizontal" action="${loginURL}" method="post"
+          <li class="nav-item">
+            <a class="nav-link" href="<%=basePath%>cart">Cart</a>
+          </li>
+          
+        </ul>
+        <c:choose>
+        	<c:when test="${sessionScope.userID eq null}">
+        		<div class="span12">
+					<a class="btn btn-outline-info" href="<%=basePath%>user/register" role="button">Signup</a>&nbsp
+					<a class="btn btn-outline-success" href="<%=basePath%>user/login" role="button">Signin</a>
+				</div>
+        	</c:when>
+        	<c:otherwise>
+        		<a class="btn btn-dark" href="" role="button">${username}</a>&nbsp
+        		<a class="btn btn-secondary" href="<%=basePath %>user/logout" role="button">Logout</a>
+        	</c:otherwise>
+        </c:choose>
+      </div>
+      </div>
+    </nav>
+	<spring:url value="/user/loginUser" var="loginURL" />
+	<form class="container">
+  		<div class="row" style="margin-top: 100px">
+  			<div class="col-md-2"></div>
+  			<div class="col-md-8 text-left">
+  				<h1 style="font-family: Baskerville; font-weight: bolder;">
+				<span>
+  					<img width="50" height="50" alt="" src="https://doc-0c-88-docs.googleusercontent.com/docs/securesc/1lhra9ur6rbc8etdjasmei79ag64jeuu/rdsu6qom73rjs71q77sr5lrdjqt6va02/1540900800000/01552601290929276177/01552601290929276177/1R7koohRf-8dTdlGlVgAPOfCgUsV4ms7W?e=download">
+  				</span>
+  				Login
+				</h1>
+  			</div>
+  			<div class="col-md-2"></div>
+  		</div>
+	</form>
+			<%-- <form:form class="form-horizontal" action="${loginURL}" method="post"
 				modelAttribute="userForm" enctype="multipart/form-data">
 				<div class="form-group">
 					<label for="nameInput"
@@ -57,12 +97,27 @@
 
 				<div class="form-group">
 					<div class="col-md-offset-6 col-md-1">
-						<button type="submit" class="btn btn-primary">Login</button>
+						<a type="button" class="btn btn-primary" href="${loginURL}">Login</a>
 					</div>
 				</div>
+			</form:form> --%>
+			<form:form action="${loginURL}" method="post" modelAttribute="userForm"
+				enctype="multipart/form-data"
+				class="container">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<div class="form-group">
+						<label for="inputUserName">Name</label>
+						<form:input id="inputUserName" path="name" placeholder="Enter User Name" class="form-control" />
+					</div>
+					<div class="form-group">
+						<label for="inputPassword">Password</label>
+						<form:password id="inputPassword" path="password" placeholder="Enter Password" class="form-control" />
+					</div>
+					<input type="submit" value="Login" class="btn btn-primary" />
+				</div>
+				<div class="col-md-2"></div>
 			</form:form>
-		</div>
-	</div>
 
 
 
