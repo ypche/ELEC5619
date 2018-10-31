@@ -4,15 +4,32 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
+<%
+      String path = request.getContextPath();
+      String basePath = request.getScheme() + "://"
+                  + request.getServerName() + ":" + request.getServerPort()
+                  + path + "/";
+%>
 
 <html>
 <head>
-	<title>Books</title>
-	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
-	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>Manage Books</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="<%=basePath %>css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="<%=basePath %>css/album.css" type="text/css" rel="stylesheet">
 </head>
 <body>
+<%@ include file="header.jsp" %>
+<br/><br/><br/><br/>
 <spring:url value="/book/addBook" var="addURL"/>
 <h2 style="font-family: cursive;"><a href="${addURL}">add a Book</a></h1>
 

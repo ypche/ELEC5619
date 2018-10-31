@@ -53,7 +53,7 @@
   			<div class="col-md-2 text-right"></div>
   			<div class="col-md-8 text-center">
   				<h1 style="font-family: Baskerville; font-weight: bolder;">
-  				<span><img width="50" height="50" alt="" src="https://doc-00-88-docs.googleusercontent.com/docs/securesc/1lhra9ur6rbc8etdjasmei79ag64jeuu/dl1vv3uefjst0mpom4aus11edar1ugrg/1540893600000/01552601290929276177/01552601290929276177/1MPUZtyD2bEsOxHLVwvcGnU7fXXoEc5eC?e=download"></span>
+  				<span><img width="50" height="50" alt="" src="/resources/books.png"></span>
   				Purchase List</h1>
   			</div>
   			<div class="col-md-2"></div>
@@ -82,7 +82,7 @@
 	  		<div class="col-md-3"></div>
 	  		<div class="col-md-6 text-right">
 	  			<h3 style="font-family: Copperplate">
-	  			<span><img width="30" height="30" alt="" src="https://doc-10-88-docs.googleusercontent.com/docs/securesc/1lhra9ur6rbc8etdjasmei79ag64jeuu/fpdqo350liamr1po25oej8kdchte52gl/1540893600000/01552601290929276177/01552601290929276177/1yOlkqTBt8KBLoHEB3OE6jjq05axfDh6n?e=download"></span>
+	  			<span><img width="30" height="30" alt="" src="/resources/coins.png"></span>
 	  			Total: <span style="font-family: American Typewriter">$ ${totalPrice}</span></h3>
 	  		</div>
 	  		<div class="col-md-3"></div>

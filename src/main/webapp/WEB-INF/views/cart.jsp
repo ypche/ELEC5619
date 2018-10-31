@@ -63,7 +63,7 @@
   			<div class="col-md-8 text-left">
   				<h1 style="font-family: Baskerville; font-weight: bolder;">
 				<span>
-  					<img width="50" height="50" alt="" src="https://doc-0c-88-docs.googleusercontent.com/docs/securesc/1lhra9ur6rbc8etdjasmei79ag64jeuu/sf7efftu59rputb0oqip8me646cfsfgf/1540900800000/01552601290929276177/01552601290929276177/1fxRlj42b0zQuZlRTqA4QzolKHvDLeWPg?e=download">
+  					<img width="50" height="50" alt="" src="/resources/carticon.png">
   				</span>
   				Hello, <span>${username}</span>
 				</h1>
@@ -91,7 +91,7 @@
 							<td>$ ${orderItem.bookPrice}</td>
 							<td>
 								<spring:url value="/cart/delete/${orderItem.id}" var="deleteURL"></spring:url>
-								<a href="${deleteURL}"><img src="https://doc-0g-88-docs.googleusercontent.com/docs/securesc/1lhra9ur6rbc8etdjasmei79ag64jeuu/qaasv30lks4s25mprsvm2t9tn1j0osak/1540893600000/01552601290929276177/01552601290929276177/1tyYl5mneEH8XY_ZEb77k2B5gYDzJfB_E?e=download" alt="Delete" width="30" height="30"></a>
+								<a href="${deleteURL}"><img src="/resources/boton-eliminar (2).png" alt="Delete" width="30" height="30"></a>
 							</td>
 						</tr>
 					

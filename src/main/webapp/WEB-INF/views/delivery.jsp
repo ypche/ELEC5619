@@ -63,7 +63,7 @@
   			<div class="col-md-8 text-left">
   				<h1 style="font-family: Baskerville; font-weight: bolder;">
   				<span>
-	  				<img width="50" height="50" alt="delivery" src="https://doc-14-88-docs.googleusercontent.com/docs/securesc/1lhra9ur6rbc8etdjasmei79ag64jeuu/tt6u94br9cql8gu0s0mc132lhkjk3k4h/1540936800000/01552601290929276177/01552601290929276177/1WW1B7tbeHBk9dGKsvm3t56MYYNqDhtJ3?e=download">
+	  				<img width="50" height="50" alt="delivery" src="/resources/delivery.png">
   				</span>
 				Delivery
 				</h1>

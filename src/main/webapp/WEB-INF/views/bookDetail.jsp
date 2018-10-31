@@ -57,8 +57,30 @@
 	                      		<button type="button" class="btn btn-sm btn-outline-secondary" disabled>Bought</button>
 	                      	</c:when>
 	                      	<c:when test="${book.status == 'Delivered' }">
-	                      		<button type="button" class="btn btn-sm btn-outline-secondary">Download</button>
-	                      	</c:when>
+	                      		<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#downloadModal">Download</button>
+		                      	<div class="modal fade" id="downloadModal" tabindex="-1" role="dialog" aria-labelledby="downloadModalLabel" aria-hidden="true">
+								  <div class="modal-dialog" role="document">
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <h5 class="modal-title" id="downloadModalLabel">Download</h5>
+								        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								          <span aria-hidden="true">&times;</span>
+								        </button>
+								      </div>
+								      <div class="modal-body">
+								      	<div class="form-group">
+											<label for="inputCode">Purchase Code</label>
+											<input class="form-control" id="inputCode" placeholder="Enter Purchase Code" />
+										</div>
+								      </div>
+								      <div class="modal-footer">
+								        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								        <button type="button" class="btn btn-primary" onClick="download('${book.id}')">OK</button>
+								      </div>
+								    </div>
+								  </div>
+								</div>
+							</c:when>
 	                      	<c:otherwise>
 	                      		<button type="button" class="btn btn-sm btn-outline-secondary" onClick="location.href='/onlineshopping/cart/addItem/${book.id}';">Add Cart</button>
 	                      	</c:otherwise>

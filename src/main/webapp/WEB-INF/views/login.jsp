@@ -34,7 +34,7 @@
   			<div class="col-md-8 text-left">
   				<h1 style="font-family: Baskerville; font-weight: bolder;">
 				<span>
-  					<img width="50" height="50" alt="" src="https://doc-0c-88-docs.googleusercontent.com/docs/securesc/1lhra9ur6rbc8etdjasmei79ag64jeuu/rdsu6qom73rjs71q77sr5lrdjqt6va02/1540900800000/01552601290929276177/01552601290929276177/1R7koohRf-8dTdlGlVgAPOfCgUsV4ms7W?e=download">
+  					<img width="50" height="50" alt="" src="/resources/login.png">
   				</span>
   				Login
 				</h1>

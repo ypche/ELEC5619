@@ -57,8 +57,8 @@
 					</c:if>
 	<!--                 <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap"> -->
 	                <div class="card-body">
-	                <p class="card-text" style="color: navy; font-family: sans-serif; font-weight: bold;">${book.title}</p>
-	                 <div >
+	                <p class="card-text" style="color: navy; font-family: sans-serif; font-weight: bold;" ><a href="<%=basePath %>book/${book.id}">${book.title}</a></p>
+					 <div >
 	                 	Author:<span class="card-text" style="color:activeborder; font-family: sans-serif;"> ${book.author}</span>
 	                 </div>
 	                 <hr>

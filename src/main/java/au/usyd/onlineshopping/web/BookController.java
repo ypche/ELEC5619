@@ -82,18 +82,40 @@ public class BookController {
 	
 	
 	@RequestMapping(value = "/manageBooks", method = RequestMethod.GET)
-	public ModelAndView manageBook() {
+	public ModelAndView manageBook(HttpSession session) {
 		ModelAndView model = new ModelAndView("booklist");
 		List<Book> list = bookService.getBooks();
 		model.addObject("list",list);
+		long userID = -1;
+		if (session.getAttribute("userID") != null) {
+			userID = (Long) session.getAttribute("userID");
+			User currentUser = userService.getUserById(userID);
+			model.addObject("username", currentUser.getName());
+		}
+		
+		if (userID != -1) {
+			for (Book book : list) {
+				book.setStatus(itemService.getStatusByBookID(book.getId(), userID));
+			}
+		}
 		return model;
 	}
 	
 	@RequestMapping(value = "/addBook", method = RequestMethod.GET)
-	public ModelAndView addBook() {
+	public ModelAndView addBook(HttpSession session) {
 		ModelAndView model = new ModelAndView("addBook");
 		Book book = new Book();
 		model.addObject("bookForm",book);
+		long userID = -1;
+		if (session.getAttribute("userID") != null) {
+			userID = (Long) session.getAttribute("userID");
+			User currentUser = userService.getUserById(userID);
+			model.addObject("username", currentUser.getName());
+		}
+		
+		if (userID != -1) {
+			book.setStatus(itemService.getStatusByBookID(book.getId(), userID));
+		}
 		return model;
 	}
 	
@@ -129,12 +151,13 @@ public class BookController {
 		//get original file name
 		String originalName = imgFile.getOriginalFilename();
 		if(imgFile!=null && originalName!=null && originalName.length()>0){
-			String pic_path = "/Users/dan/git/elec5619/image/";
+			String pic_path = "/resources/";
 			System.out.println(pic_path);
-			String newFileName = UUID.randomUUID().toString()+originalName.substring(originalName.lastIndexOf("."));
+			/*String newFileName = UUID.randomUUID().toString()+originalName.substring(originalName.lastIndexOf("."));
 			//new picture
 			File newFile = new File(pic_path+newFileName);
-			imgFile.transferTo(newFile);
+			imgFile.transferTo(newFile);*/
+			String newFileName = pic_path + imgFile.getOriginalFilename();
 			bookService.addBook(book,newFileName);
 			
 			
