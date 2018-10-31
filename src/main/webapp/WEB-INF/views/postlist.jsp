@@ -64,6 +64,7 @@
 			<a class="navbar-brand" href="<%=basePath %>forum/addComments">Content: The children book is good!</a>
 			
 		</form>
+		<form>
           <div class="row">
          	<c:forEach items="${cs}" var="post" varStatus="st">
 	            <div class="col-md-3">
@@ -78,17 +79,23 @@
 	                    <div class="btn-group">
 	                      <button type="button" class="btn btn-sm btn-outline-secondary">Add comment</button>
 	                    </div>
-	                    <small class="text-muted">Price: ${post.time}</small>
+	                    <small class="text-muted">${post.time}</small>
+	     
+						
 	                  </div>
 	                </div>
 	              </div>
 	            </div>
 			</c:forEach>
           </div>
+          </form>
         </div>
       </div>
 	 <div>
 	 	<a class="navbar-brand" href="<%=basePath %>forum/addPost">Add a new Post.</a>
+	 	<br>
+	 	<spring:url value = "/forum/delete/${post.id}" var="deleteURL"></spring:url>	
+						<a class="navar-brand" href="${deleteURL}"> delete</a>
 	 </div>
     </main>
 
